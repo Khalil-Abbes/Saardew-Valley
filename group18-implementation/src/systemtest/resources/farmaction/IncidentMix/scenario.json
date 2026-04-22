@@ -1,0 +1,10 @@
+{
+  "clouds": [],
+  "incidents": [
+    { "id": 1, "type": "BEE_HAPPY", "tick": 0, "location": 4, "radius": 0, "effect": 25 },
+    { "id": 2, "type": "ANIMAL_ATTACK", "tick": 1, "location": 8, "radius": 0 },
+    { "id": 3, "type": "CLOUD_CREATION", "tick": 2, "location": 2, "radius": 0, "duration": 1, "amount": 4000 },
+    { "id": 4, "type": "CLOUD_CREATION", "tick": 2, "location": 6, "radius": 0, "duration": 1, "amount": 3000 },
+    { "id": 5, "type": "DROUGHT", "tick": 3, "location": 10, "radius": 0 }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "tiles": [
+    {
+      "category": "VILLAGE",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "id": 1
+    },
+    {
+      "airflow": false,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "id": 2
+    },
+    {
+      "airflow": false,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 4,
+        "y": 0
+      },
+      "id": 3
+    },
+    {
+      "airflow": false,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 0,
+        "y": 2
+      },
+      "id": 4
+    },
+    {
+      "airflow": false,
+      "capacity": 520,
+      "category": "FIELD",
+      "coordinates": {
+        "x": 2,
+        "y": 2
+      },
+      "farm": 1,
+      "id": 5,
+      "possiblePlants": [
+        "PUMPKIN",
+        "OAT"
+      ]
+    },
+    {
+      "airflow": false,
+      "category": "FARMSTEAD",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "farm": 1,
+      "id": 6,
+      "shed": true
+    },
+    {
+      "airflow": false,
+      "capacity": 520,
+      "category": "FIELD",
+      "coordinates": {
+        "x": 4,
+        "y": 2
+      },
+      "farm": 1,
+      "id": 7,
+      "possiblePlants": [
+        "PUMPKIN",
+        "OAT"
+      ]
+    }
+  ]
+}

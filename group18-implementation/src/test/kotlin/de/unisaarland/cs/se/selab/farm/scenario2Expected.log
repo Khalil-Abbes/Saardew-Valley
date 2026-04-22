@@ -1,0 +1,15 @@
+[IMPORTANT] Farm: Farm 34 starts its actions.
+[DEBUG] Farm: Farm 34 has the following active sowing plans it intends to pursue in this tick: 3.
+[IMPORTANT] Farm Action: Machine 1 performs SOWING on tile 40 for 4 days.
+[IMPORTANT] Farm Sowing: Machine 1 has sowed WHEAT according to sowing plan 3.
+[IMPORTANT] Farm Action: Machine 1 performs SOWING on tile 44 for 4 days.
+[IMPORTANT] Farm Sowing: Machine 1 has sowed WHEAT according to sowing plan 3.
+[IMPORTANT] Farm Machine: Machine 1 is finished and returns to the shed at 12.
+[IMPORTANT] Farm Action: Machine 2 performs HARVESTING on tile 42 for 10 days.
+[IMPORTANT] Farm Harvest: Machine 2 has collected 320850 g of PUMPKIN harvest.
+[IMPORTANT] Farm Machine: Machine 2 is finished and returns to the shed at 12.
+[IMPORTANT] Farm Machine: Machine 2 unloads 320850 g of PUMPKIN harvest in the shed.
+[IMPORTANT] Farm Action: Machine 3 performs IRRIGATING on tile 46 for 4 days.
+[IMPORTANT] Farm Action: Machine 3 performs IRRIGATING on tile 50 for 4 days.
+[IMPORTANT] Farm Machine: Machine 3 is finished and returns to the shed at 12.
+[IMPORTANT] Farm: Farm 34 finished its actions.

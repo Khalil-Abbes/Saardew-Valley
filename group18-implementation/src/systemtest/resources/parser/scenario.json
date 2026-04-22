@@ -1,0 +1,39 @@
+{
+  "clouds": [
+    {
+      "id": 3,
+      "location": 23,
+      "duration": -1,
+      "amount": 4000
+    },
+    {
+      "id": 5,
+      "location": 18,
+      "duration": 2,
+      "amount": 2000
+    },
+    {
+      "id": 9,
+      "location": 12,
+      "duration": 1,
+      "amount": 4500
+    }
+  ],
+  "incidents": [
+    {
+      "id": 2,
+      "type": "ANIMAL_ATTACK",
+      "tick": 4,
+      "location": 19,
+      "radius": 2
+    },
+    {
+      "id": 3,
+      "type": "BEE_HAPPY",
+      "tick": 4,
+      "location": 120,
+      "radius": 1,
+      "effect": 100
+    }
+  ]
+}

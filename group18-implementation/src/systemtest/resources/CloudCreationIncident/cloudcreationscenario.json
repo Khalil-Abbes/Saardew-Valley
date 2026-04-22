@@ -1,0 +1,146 @@
+{
+  "clouds": [
+    {
+      "id": 1,
+      "location": 8,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 2,
+      "location": 9,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 3,
+      "location": 10,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 4,
+      "location": 11,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 5,
+      "location": 12,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 6,
+      "location": 13,
+      "duration": -1,
+      "amount": 1
+    }
+  ],
+  "incidents": [
+    {
+      "id": 8,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 1,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 9,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 2,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 10,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 3,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 11,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 4,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 12,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 5,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 13,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 6,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 15,
+      "type": "CLOUD_CREATION",
+      "tick": 2,
+      "location": 8,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 16,
+      "type": "CLOUD_CREATION",
+      "tick": 2,
+      "location": 9,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 17,
+      "type": "CLOUD_CREATION",
+      "tick": 0,
+      "location": 10,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 18,
+      "type": "CLOUD_CREATION",
+      "tick": 2,
+      "location": 11,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 19,
+      "type": "CLOUD_CREATION",
+      "tick": 2,
+      "location": 12,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 20,
+      "type": "CLOUD_CREATION",
+      "tick": 2,
+      "location": 13,
+      "radius": 0,
+      "duration": -1,
+      "amount": 1
+    }
+  ]
+}

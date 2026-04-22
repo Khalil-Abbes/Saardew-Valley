@@ -1,0 +1,26 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "RadiusLateZeroMoistFarm",
+      "farmsteads": [0],
+      "fields": [2, 4, 6, 8, 10, 12],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 0,
+          "name": "AllFieldSeeder",
+          "actions": ["SOWING"],
+          "plants": ["POTATO", "WHEAT", "OAT", "PUMPKIN"],
+          "duration": 4,
+          "location": 0
+        }
+      ],
+      "sowingPlans": [
+        { "id": 1, "tick": 2, "plant": "OAT", "fields": [2] },
+        { "id": 2, "tick": 5, "plant": "PUMPKIN", "location": 100, "radius": 3 },
+        { "id": 3, "tick": 4, "plant": "POTATO", "fields": [12] }
+      ]
+    }
+  ]
+}

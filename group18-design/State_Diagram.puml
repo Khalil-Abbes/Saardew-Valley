@@ -1,0 +1,164 @@
+@startuml State_diagram
+
+[*] --> ParsingStart : main()
+
+ParsingStart --> Parsing :parse() 
+
+Parsing --> ParseMap : parseMap()
+ParseMap --> Failure : parseMap() / [invalid map]
+ParseMap --> ParseFarm : parseMap() / [valid map]
+
+ParseFarm --> Failure : parseFarm() / [invalid farm]
+ParseFarm --> ParseScenario : parseFarm() / [valid farm]
+
+ParseScenario --> Failure : parseScenario() / [invalid scenario]
+ParseScenario --> ValidatedParsing : parseScenario() / [valid scenario]
+
+ValidatedParsing --> Failure : validate() / [validation failed]
+ValidatedParsing --> Simulating : validate() / [all valid]
+
+Simulating --> SimulationStart : simulation.run() / [tick less than maxTicks]
+
+SimulationStart --> ReduceSoilOnAllTiles : simulation.reduceSOilMosture()
+
+ReduceSoilOnAllTiles --> AllCloudsPhase : simulation.handleClouds()
+
+state AllCloudsPhase {
+  [*] --> RainCheck
+
+  state Dissipate 
+
+  RainCheck --> Raining : [amount >= 5000]
+  RainCheck --> Moving : [amount < 5000]
+
+  state Raining {
+    [*] --> RainDecision
+    RainDecision --> RainFull : tileHasCapacity AND amount >= diff
+    RainDecision --> RainPartial : tileHasCapacity AND amount < diff
+    RainDecision --> Dissipate : tileNoCapacity
+
+    RainFull --> Moving : leftoverAmount > 0
+    RainFull --> Dissipate : leftoverAmount == 0
+    RainPartial --> Dissipate : emptyCloud
+
+  }
+
+  state Moving {
+    [*] --> Traversing : duration /= 0
+    [*] -> Dissipate : duration = 0
+    Traversing --> Merging : NextTileHasCloud
+    Traversing --> Dissipate : nextTileVillage OR Unspecified
+    Traversing --> Arrived : NextTileNoCloud
+    Merging --> RainCheck : after merge
+    Arrived --> RainCheck : checkRainConditions()
+  }
+
+  Dissipate --> [*]
+}
+
+
+AllCloudsPhase --> AllFarmAction : simulation.farmAction()
+
+state AllFarmAction {
+    [*] --> AllFarmActionStart
+    AllFarmActionStart --> FarmAction : farm.run() / [farm active]
+    FarmAction --> ActionStart : farm.chooseAction() / [action exists]
+    FarmAction --> AllFarmActionStart : farm.chooseAction() / [no action]
+    ActionStart --> TileSelect : farm.selectTile() / [tile selected]
+    ActionStart --> FarmAction : farm.selectTile() / [no tile selected]
+    TileSelect --> MachineChoosen : farm.chooseMachine() / [machine chosen]
+    TileSelect --> FarmAction : farm.chooseMachine() / [no machine chosen]
+    TileSelect --> AllFarmActionStart : farm.chooseMachine() / [no machines available]
+    MachineChoosen --> FirstMove : machine.initialMove()
+
+    FirstMove --> ActionPerformed : machine.performAction()
+    ActionPerformed --> MovePossible : machine.checkTimeLeft() / [true]
+    MovePossible --> ChoosingNextMoveTile : machine.checkNearbyTiles() / [true]
+    ChoosingNextMoveTile --> NextTileSelected : machine.selectNextTile()
+    ChoosingNextMoveTile --> MachineMoveEnd : machine.selectNextTile() / [machine is stuck]
+    NextTileSelected --> ContinueToMove : machine.continueMove()
+    ContinueToMove --> FirstMove : machine.performAction()
+    ActionPerformed --> MachineMoveEnd : machine.checkTimeLeft() / [false]
+    MovePossible --> MachineMoveEnd : machine.checkNearbyTiles() / [false]
+    MachineMoveEnd --> FarmAction : machine.returnToShed() / [shed is reachable]
+    MachineMoveEnd --> ReturnShedFail : machine.returnToShed() / [shed is not reachable]
+    ReturnShedFail --> FarmAction : machine.removeMachine()
+}
+
+AllFarmAction --> IncidentsPhase : farm.run() / [no active farm]
+
+state IncidentsPhase{
+    [*] --> IncidentsStart
+
+    IncidentsStart --> CloudCreationIncidentStart : selectIncident[CloudCreation]
+    CloudCreationIncidentStart --> IncidentProcessed : createCloud() / [!hasCloudOnTile]
+    CloudCreationIncidentStart --> IncidentProcessed : createCloud() / [hasCloudOnTile]
+
+    IncidentsStart --> BeeHappyIncidentStart : selectIncident() / [BeeHappy]
+    BeeHappyIncidentStart --> IncidentProcessed : pollinate() / [hasMeadowsInRadius && (hasFieldsAround || hasPlantationsAround)]
+
+    IncidentsStart --> DroughtIncidentStart : selectIncident() / [DroughtIncident]
+    DroughtIncidentStart --> ReducedMoisture : reduceMoisture() / [Plantation || Field]
+    ReducedMoisture --> IncidentProcessed : killPlants() / [Plantation || Field]
+
+    IncidentsStart --> BrokenMachineIncidentStart : selectIncident() / [BrokenMachine]
+    BrokenMachineIncidentStart --> IncidentProcessed : breakMachine()
+
+    IncidentsStart --> CityExpansionIncidentStart : selectIncident() / [CityExpansion]
+    CityExpansionIncidentStart --> PlantsKilled : killPlants() / [Plantation || Field]
+    PlantsKilled --> IncidentProcessed : createVillage()
+    CityExpansionIncidentStart --> IncidentProcessed : createVillage() / [!Plantation && !Field]
+
+    IncidentsStart --> AnimalAttackIncidentStart : selectIncident() / [AnimalAttack]
+    AnimalAttackIncidentStart --> IncidentProcessed : updateHarvest() / [update harvest in radius]
+
+    IncidentProcessed --> IncidentsStart : continueProcessing[hasMoreIncidentsInCurrentTick]
+}
+
+IncidentsPhase --> ComputeHarvest : simulation.computeHarvest() / [!hasMoreIncidentsInCurrentTick]
+
+ComputeHarvest --> HarvestEstBegin : simulation.beginHarvestEstLoop()
+
+HarvestEstBegin --> FieldFlow : simulation.nextHarvestEstTile() [tile is Field]
+HarvestEstBegin --> PlantationFlow : simulation.nextHarvestEstTile() [tile is Plantation]
+
+state FieldFlow {
+  [*] --> DecideF
+  DecideF --> ZeroF : field.wasHarvestedThisTick() [true]
+  ZeroF --> ExitF : field.setHarvestEstimate()
+
+  DecideF --> InitF : field.wasHarvestedThisTick() [false]
+  InitF --> EnvF : field.setHarvestEstimate()=>init [if sown this tick] AndLateSowIfNeeded()
+  EnvF --> ActionsF : harvestCalculator.applyEnvironmentalSunThenMoisture()
+  ActionsF --> IncidentsF : harvestCalculator.applyFieldActionPenalties()
+  IncidentsF --> FinalizeF : harvestCalculator.applyIncidentsEffect()
+  FinalizeF --> ExitF : harvest.finalizeClampAndFloor()
+}
+FieldFlow --> HarvestEstBegin : simulation.finishHarvestEstTile()
+
+state PlantationFlow {
+  [*] --> DecideP
+  DecideP --> ZeroP : plantation.wasHarvestedThisTick() [true]
+  ZeroP --> ExitP : plantation.setHarvestEstimate()
+
+  DecideP --> InitP : plantation.wasHarvestedThisTick() [false]
+  InitP --> EnvP : plantation.setHarvestEstimate()=>init [if start of sim, or early Nov]
+  EnvP --> ActionsP : harvestCalculator.applyEnvironmentalSunThenMoisture()
+  ActionsP --> IncidentsP : harvestCalculator.applyPlantationActionPenalties()
+  IncidentsP --> FinalizeP : harvestCalculator.applyIncidentsEffect()
+  FinalizeP --> ExitP : harvestCalculator.finalizeClampAndFloor()
+}
+PlantationFlow --> HarvestEstBegin : simulation.finishHarvestEstTile()
+
+HarvestEstimateFinished --> SimulationEnd : [tick == maxTick]
+HarvestEstimateFinished --> SimulationStart : simulation.increaseTick() / [tick less than maxTicks]
+HarvestEstBegin --> HarvestEstimateFinished : simulation.nextHarvestEstTile() [no more tiles]
+
+SimulationEnd --> Finished : logger.logResults()
+
+
+
+Finished --> [*]
+
+Failure --> [*]
+@enduml

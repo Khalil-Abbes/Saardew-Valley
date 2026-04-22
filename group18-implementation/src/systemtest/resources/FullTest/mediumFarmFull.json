@@ -1,0 +1,138 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "TOP FARM",
+      "farmsteads": [13, 16],
+      "fields": [7, 8, 18, 19, 20],
+      "plantations": [10, 11, 21, 22],
+      "machines": [
+        {
+          "id": 1,
+          "name": "Field Machine Top",
+          "actions": ["SOWING", "CUTTING", "MOWING", "WEEDING", "IRRIGATING", "HARVESTING"],
+          "plants": ["OAT", "PUMPKIN", "WHEAT", "POTATO"],
+          "duration": 3,
+          "location": 13
+        },
+        {
+          "id": 2,
+          "name": "Plantation Machine Top",
+          "actions": ["SOWING", "CUTTING", "MOWING", "WEEDING", "IRRIGATING", "HARVESTING"],
+          "plants": ["APPLE", "GRAPE", "ALMOND", "CHERRY"],
+          "duration": 3,
+          "location": 16
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 1,
+          "tick": 18,
+          "plant": "WHEAT",
+          "fields": [18]
+        },
+        {
+          "id": 2,
+          "tick": 4,
+          "plant": "OAT",
+          "location": 8,
+          "radius": 3
+        },
+        {
+          "id": 3,
+          "tick": 12,
+          "plant": "PUMPKIN",
+          "fields": [7, 8, 18]
+        },
+        {
+          "id": 4,
+          "tick": 8,
+          "plant": "POTATO",
+          "location": 20,
+          "radius": 1
+        },
+        {
+          "id": 30,
+          "tick": 12,
+          "plant": "PUMPKIN",
+          "location": 20,
+          "radius": 5
+        },
+        {
+          "id": 31,
+          "tick": 19,
+          "plant": "POTATO",
+          "location": 13,
+          "radius": 3
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "BOTTOM FARM",
+      "farmsteads": [46, 49],
+      "fields": [42, 43, 44, 54, 55],
+      "plantations": [40, 41, 51, 52],
+      "machines": [
+        {
+          "id": 3,
+          "name": "Field Machine Bottom",
+          "actions": ["SOWING", "CUTTING", "MOWING", "WEEDING", "IRRIGATING", "HARVESTING"],
+          "plants": ["OAT", "PUMPKIN", "WHEAT", "POTATO"],
+          "duration": 3,
+          "location": 46
+        },
+        {
+          "id": 4,
+          "name": "Plantation Machine Bottom",
+          "actions": ["SOWING", "CUTTING", "MOWING", "WEEDING", "IRRIGATING", "HARVESTING"],
+          "plants": ["APPLE", "GRAPE", "ALMOND", "CHERRY"],
+          "duration": 3,
+          "location": 49
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 5,
+          "tick": 19,
+          "plant": "WHEAT",
+          "fields": [54]
+        },
+        {
+          "id": 6,
+          "tick": 5,
+          "plant": "OAT",
+          "location": 44,
+          "radius": 1
+        },
+        {
+          "id": 7,
+          "tick": 11,
+          "plant": "PUMPKIN",
+          "fields": [55]
+        },
+        {
+          "id": 8,
+          "tick": 3,
+          "plant": "POTATO",
+          "location": 43,
+          "radius": 1
+        },
+        {
+          "id": 9,
+          "tick": 21,
+          "plant": "PUMPKIN",
+          "location": 37,
+          "radius": 2
+        },
+        {
+          "id": 18,
+          "tick": 23,
+          "plant": "POTATO",
+          "location": 29,
+          "radius": 3
+        }
+      ]
+    }
+  ]
+}

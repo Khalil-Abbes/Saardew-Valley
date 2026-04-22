@@ -1,0 +1,17 @@
+{
+  "clouds": [],
+  "incidents": [
+    { "id": 1, "type": "BROKEN_MACHINE", "tick": 3, "machineId": 1, "duration": 3 },
+
+    { "id": 2, "type": "BEE_HAPPY", "tick": 5, "location": 8, "radius": 0, "effect": 30 },
+    { "id": 3, "type": "BEE_HAPPY", "tick": 6, "location": 8, "radius": 0, "effect": 20 },
+
+    { "id": 4, "type": "ANIMAL_ATTACK", "tick": 11, "location": 12, "radius": 0 },
+
+    { "id": 5, "type": "BROKEN_MACHINE", "tick": 12, "machineId": 2, "duration": 7 },
+
+    { "id": 6, "type": "DROUGHT", "tick": 7, "location": 6, "radius": 0 },
+
+    { "id": 7, "type": "CLOUD_CREATION", "tick": 10, "location": 2, "radius": 0, "duration": -1, "amount": 5000 }
+  ]
+}

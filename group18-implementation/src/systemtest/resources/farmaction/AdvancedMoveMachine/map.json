@@ -1,0 +1,57 @@
+{
+  "tiles": [
+    {
+      "id": 0,
+      "coordinates": { "x": 1, "y": 1 },
+      "category": "FARMSTEAD",
+      "farm": 0,
+      "shed": true,
+      "airflow": false
+    },
+
+    { "id": 10, "coordinates": { "x": 2, "y": 2 }, "category": "ROAD", "airflow": false },
+
+    { "id": 14, "coordinates": { "x": 4, "y": 2 }, "category": "ROAD", "airflow": false },
+    {
+      "id": 16,
+      "coordinates": { "x": 6, "y": 2 },
+      "category": "FIELD",
+      "farm": 1,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    { "id": 18, "coordinates": { "x": 8, "y": 2 }, "category": "ROAD", "airflow": false },
+
+    {
+      "id": 12,
+      "coordinates": { "x": 10, "y": 2 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    {
+      "id": 22,
+      "coordinates": { "x": 6, "y": 4 },
+      "category": "PLANTATION",
+      "farm": 1,
+      "capacity": 1200,
+      "plant": "APPLE",
+      "airflow": false
+    },
+    { "id": 100, "coordinates": { "x": 5, "y": 3 }, "category": "ROAD", "airflow": false },
+    { "id": 200, "coordinates": { "x": 7, "y": 3 }, "category": "ROAD", "airflow": false },
+    { "id": 300, "coordinates": { "x": 7, "y": 1 }, "category": "ROAD", "airflow": false },
+    { "id": 400, "coordinates": { "x": 6, "y": 0 }, "category": "ROAD", "airflow": false },
+    {
+      "id": 32,
+      "coordinates": { "x": 5, "y": 1 },
+      "category": "FARMSTEAD",
+      "farm": 1,
+      "shed": true,
+      "airflow": false
+    }
+  ]
+}

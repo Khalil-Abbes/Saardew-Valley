@@ -1,0 +1,15 @@
+{
+  "clouds": [],
+  "incidents": [
+    { "id": 1, "type": "CITY_EXPANSION", "tick": 1,  "location": 24 },
+    { "id": 2, "type": "CITY_EXPANSION", "tick": 1,  "location": 3  },
+
+    { "id": 3, "type": "BEE_HAPPY",      "tick": 2,  "location": 11, "radius": 0, "effect": 25 },
+    { "id": 4, "type": "BEE_HAPPY",      "tick": 2,  "location": 11, "radius": 0, "effect": 10 },
+    { "id": 5, "type": "BEE_HAPPY",      "tick": 2, "location": 9,  "radius": 0, "effect": 30 },
+
+    { "id": 6, "type": "BROKEN_MACHINE", "tick": 3, "machineId": 2, "duration": 1 },
+
+    { "id": 7, "type": "DROUGHT",        "tick": 3, "location": 22, "radius": 0 }
+  ]
+}

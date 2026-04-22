@@ -1,0 +1,22 @@
+{
+  "clouds": [],
+  "incidents": [
+    { "id": 1,  "type": "CITY_EXPANSION", "tick": 0, "location": 111 },
+    { "id": 2,  "type": "CITY_EXPANSION", "tick": 0, "location": 110 },
+    { "id": 3,  "type": "CITY_EXPANSION", "tick": 0, "location": 20  },
+    { "id": 4,  "type": "CITY_EXPANSION", "tick": 0, "location": 203 },
+    { "id": 5,  "type": "CITY_EXPANSION", "tick": 0, "location": 32  },
+    { "id": 6,  "type": "CITY_EXPANSION", "tick": 0, "location": 125 },
+
+    { "id": 7,  "type": "CITY_EXPANSION", "tick": 1, "location": 115 },
+    { "id": 8,  "type": "CITY_EXPANSION", "tick": 1, "location": 24  },
+    { "id": 9,  "type": "CITY_EXPANSION", "tick": 1, "location": 121 },
+    { "id": 10, "type": "CITY_EXPANSION", "tick": 1, "location": 40  },
+
+    { "id": 100, "type": "CLOUD_CREATION", "tick": 1, "location": 112, "radius": 0, "duration": 2, "amount": 6000 },
+
+    { "id": 11, "type": "CITY_EXPANSION", "tick": 2, "location": 26  },
+    { "id": 12, "type": "CITY_EXPANSION", "tick": 2, "location": 44  },
+    { "id": 13, "type": "CITY_EXPANSION", "tick": 2, "location": 123 }
+  ]
+}

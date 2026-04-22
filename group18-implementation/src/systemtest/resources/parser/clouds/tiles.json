@@ -1,0 +1,49 @@
+{
+  "tiles": [
+    {
+      "category": "VILLAGE",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "id": 1
+    },
+    {
+      "airflow": false,
+      "category": "FARMSTEAD",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "farm": 1,
+      "id": 6,
+      "shed": true
+    },
+    {
+      "airflow": true,
+      "capacity": 3200,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "0",
+      "farm": 1,
+      "id": 2,
+      "plant": "CHERRY"
+    },
+    {
+      "airflow": true,
+      "capacity": 2500,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 4,
+        "y": 0
+      },
+      "direction": "90",
+      "farm": 1,
+      "id": 3,
+      "plant": "APPLE"
+    }
+  ]
+}

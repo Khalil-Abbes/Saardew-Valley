@@ -1,0 +1,406 @@
+@startuml second_sequence
+autoactivate on
+participant Main as m
+participant Simulation as s
+participant "t: Tile" as t
+participant "field:Field" as f
+participant "logger: LoggerFacade" as l
+participant "f34: Farm" as farm
+participant "m1: Machine" as m1
+participant "w: FieldPlant" as w
+participant "p: FieldPlant" as p
+participant "cloudHandler: CloudHandler" as ch
+participant "tileManager: TileManager" as tm
+participant "sp3: SowingPlan" as sp3
+participant "hw: HarvestWindow" as hw
+participant "bw: BloomWindow" as bw
+participant "hl: HarvestLate" as hl
+participant "wr: WeedingRule" as wr
+participant "pf: plantFactory" as pf
+participant "t40: Field" as t40
+participant "t44: Field" as t44
+participant "t42: Field" as t42
+participant "t43: Field" as t43
+participant "t48: Field" as t48
+
+s -> s: runTick(32, OCT1)
+s -> l: logTickStart(32, 19)
+l --> s:
+
+group reduceSoilMoisturePhase
+
+s -> s: reduceSoilMoisture()
+s -> tm: getFields()
+tm --> s: [t40, t42, t43, t44, t46, t48, t50, t52, t54]
+
+loop for each field in fields
+    group Tile 43, 44, 48
+    s -> f: getPlant()
+    f --> s: p
+    s -> s: isNull(p)
+    s --> s: True
+    s -> f: reduceSoilMoisture(70)
+    f --> s:
+    s -> f: moistureBelowThreshold()
+    f --> s: True
+    end
+    group  Tile 40, 42, 46, 50, 52, 54
+    s -> f: getPlant()
+    f --> s: p
+    s -> s: isNull(p)
+    s --> s: False
+    s -> f: reduceSoilMoisture(100)
+    f --> s:
+    s -> f: moistureBelowThreshold()
+    f --> s: True
+    end
+
+end
+
+s -> l: logSoilMosture(9, 0)
+l --> s:
+s --> s:
+
+end
+
+
+group CloudPhase
+
+s -> s: handleClouds()
+s -> ch: getClouds()
+ch --> s: []
+s --> s:
+
+end
+
+
+group FarmActionPhase
+
+s -> s: farmAction(32, OCT1)
+s -> s: getFarms()
+s --> s: [f34]
+s -> farm: run(32, OCT1)
+farm -> l: logFarmStart(34)
+l --> farm:
+farm -> farm: sowFields(32, OCT1)
+farm -> farm: getFulfillableSowingPlans(32)
+farm -> farm: getSowingPlans()
+farm --> farm: [sp3]
+farm --> farm: [sp3].filter{it.tick, <= 32}.orderBy(it.tick, it.id)
+farm -> l: logActiveSowingPlans(34, 3)
+l --> farm
+farm -> farm: executePlan(sp3)
+farm -> sp3: getPlantType()
+sp3 --> farm: WHEAT
+
+farm -> sp3 : getFields()
+sp3 --> farm: [t40, t43, t44, t48, t52]
+farm -> t40: canBeSowed(32, 19, WHEAT)
+t40 -> t40: this.fallowUntilTick <= 32
+t40 --> t40: True
+t40 -> t40: WHEAT in this.possiblePlants
+t40 --> t40: True
+t40 -> t40: WHEAT.window.contains(19)
+t40 --> t40
+'Maybe details of the functions
+t40 --> farm: True
+farm -> farm: getAvailableSowingMachines()
+farm --> farm: [m1]
+farm -> m1: canHandle(WHEAT, t40)
+m1 -> tm: existsPath(t12, t40, 3, False)
+tm --> m1: True
+m1 --> farm: True
+farm -> m1: doSowing(t40, 32, 19, WHEAT)
+m1 -> m1: setIsAvailable(False)
+m1 --> m1:
+m1 -> m1: this.handledThisTick +=1
+m1 --> m1
+m1 -> m1: setLocation(t40)
+m1 --> m1
+m1 -> pf: createWheatPlant()
+pf -> hw: Window(JUN1, JUL1)
+hw --> pf: hw
+pf -> bw: Window(MAY1, MAY1)
+bw --> pf: bw
+pf -> hl: LateRule(20, 2)
+hl --> pf: hl
+pf -> wr: FieldWeedingRule([3, 9])
+wr --> pf: wr
+pf -> w: Plant(WHEAT, initialEstimate:1'500'000, moistureRequired:450, sunlightComfort:90, pollination:SELF-POLLINATES, harvestWindow:hw, bloomWindows:bw, harvestLate:hl, sowWindows:sw, weedingRule:wr)
+w --> pf: w
+pf --> m1: w
+m1 -> w : setProgress(SOWING, 32)
+w --> m1:
+m1 -> t40: setPlant(w)
+t40 --> m1
+m1 -> l: logFarmAction(1, SOWING, 40, 4)
+l --> m1:
+m1 -> l: logFarmSowing(40, WHEAT, 3)
+l --> m1:
+m1 --> farm: True
+farm -> sp3: setFulfilled()
+sp3 --> farm
+farm -> tm: getFieldsAndPlantationsSameFarmInRadius(34, t40, 2)
+tm --> farm: [t42, t44]
+farm -> farm: [t40, t43, t44, t48, t52].getIntersection([t42, t44])
+farm --> farm: [t44]
+farm -> t44: canBeSowed(32, 19, WHEAT)
+t44 --> farm: True
+farm -> m1: canHandle(WHEAT, t44)
+m1 -> tm : existsPath(t40, t44, 3, False)
+tm --> m1: True
+m1 --> farm: True
+farm -> m1: doSowing(t44, 32, 19, WHEAT)
+m1 -> m1: setIsAvailable(False)
+m1 --> m1:
+m1 -> m1: this.handledThisTick +=1
+m1 --> m1
+m1 -> m1: setLocation(t44)
+m1 --> m1
+m1 -> pf: createWheatPlant()
+pf --> m1: w2
+m1 -> w2 : setProgress(SOWING, 32)
+w2 --> m1:
+m1 -> t44: setPlant(w2)
+t44 --> m1
+m1 -> l: logFarmAction(1, SOWING, 44, 4)
+l --> m1:
+m1 -> l: logFarmSowing(44, WHEAT, 3)
+l --> m1:
+m1 --> farm: True
+farm -> tm: getFieldsAndPlantationsSameFarmInRadius(34, t44, 2)
+tm --> farm: [t43, t46, t48]
+farm -> farm: [t40, t43, t44, t48, t52].getIntersection([t43, t46, t48])
+farm --> farm: [t43, t48]
+farm -> t43: canBeSowed(32, 19, WHEAT)
+t43 --> farm: False
+farm -> t48: canBeSowed(32, 19, WHEAT)
+t48 --> farm: False
+
+
+
+
+farm -> m1: returnToFarmstead(machineToShed[m1])
+m1 -> tm: existsPath(t44, t12, 3, False)
+tm --> m1:  True
+m1 -> m1: setLocation(t12)
+m1 --> m1
+m1 --> farm: True
+
+farm -> l: logMachineReturn(1, 12)
+l --> farm
+farm --> farm
+farm --> farm
+
+
+
+farm -> farm: harvestPlantations(32, 19)
+farm -> farm: getPlantationsWithHarvestablePlants(32, 19)
+farm -> farm: getPlantations()
+farm --> farm:
+farm --> farm: []
+farm --> farm:
+
+
+farm -> farm: harvestFields(32, 19)
+farm -> farm: getFieldsWithHarvestablePlants(32, 19)
+farm --> farm: [t42, t46, t50, t54]
+farm -> farm: getAvailableHarvestingMachines()
+farm --> farm: [m2]
+farm -> t42: getPlantType()
+t42 --> farm: PUMPKIN
+
+farm -> m2: canHandle(PUMPKIN, t42)
+m2 -> tm: existsPath(t12, t42, 3, false)
+tm --> m2: True
+m2 --> farm: True
+farm -> m2: doHarvesting(t42, 32)
+
+m2 -> m2: setIsAvailable(False)
+m2 --> m2:
+m2 -> m2: this.handledThisTick +=1
+m2 --> m2:
+m2 -> m2: setLocation(t42)
+m2 --> m2:
+m2 -> t42: getPlant()
+t42 --> m2: p
+m2 -> p: getCurrentEstimate()
+p --> m2: 320'850
+m2 -> m2: setCargo(PUMPKIN, 320'850)
+m2 --> m2:
+m2 -> p: setProgress(HARVESTING, 32)
+p -> p: setCurrentHarvestEstimate(0)
+p --> p:
+p --> m2
+
+m2 -> l: logFarmAction(2, HARVESTING, 42, 10)
+l --> m2
+m2 -> l: logFarmHarvest(2, ,PUMPKIN)
+l --> farm:
+
+m2 --> farm: True
+farm -> tm: getFieldsAndPlantationsSameFarmInRadius(34, t42, 2)
+tm --> farm: [t40, t44, t46]
+farm -> farm: [t40, t44, t46].filterBy{ PUMPKIN == it.plant.plantType && it.needsHarvesting() }
+farm --> farm: [t46]
+farm -> m2: canHandle(PUMPKIN, t46)
+m2 -> m2: this.handledThisTick * this.duration <= 14
+m2 --> m2: False
+m2 --> farm: False
+
+farm -> m2: returnToFarmstead(machineToShed[m2])
+m2 -> tm: existsPath(t42, t12, 3, True)
+tm --> m2:  True
+m2 -> m2: this.location = t12
+m2 --> m2
+m2 -> l: logMachineReturn(2, 12)
+l --> m2
+m2 --> farm
+
+farm -> farm: getFieldsWithHarvestablePlants(32, 19)
+farm --> farm: [t46, t50, t54]
+farm -> farm: getAvailableHarvestingMachines()
+farm --> farm: []
+
+
+
+farm --> farm:
+farm -> farm: cutPlantations()
+farm -> farm: getPlantationsWithCuttablePlants()
+farm --> farm: []
+farm -> farm: doRemaining(32, 19)
+farm -> farm: getAvailableMachines()
+farm --> farm: [m3]
+farm -> m3: getActions()
+m3 --> farm: [IRRIGATING, WEEDING]
+farm -> m3: getPlants()
+m3 --> farm: [PUMPKIN]
+farm -> farm: getFieldsWithIrrigatingPlants([PUMPKIN])
+farm --> farm: [t42, t46, t50, t54]
+farm -> farm: filterAlreadyWorked([t42, t46, t50, t54])
+loop for each tile in [t42, t46, t50, t54]
+group if Tile has already been worked on this tick [t42]
+farm -> t42: getProgress()
+t42 --> farm : <Harvesting, 32>
+farm -> t42: [t42, t46, t50, t54].remove(42)
+end
+group if Tile hasn't been already worked on this tick
+farm -> t46: getProgress()
+t46 --> farm :<>
+end
+farm --> farm: l = [t46, t50, t54]
+end
+
+farm -> m3: canHandle(PUMPKIN, t46)
+
+m3 -> m3: this.handledThisTick * this.duration <= 14
+m3 --> m3: True
+m3 -> tm: existsPath(t12, t46, 3, false)
+tm --> m3: True
+m3 --> farm: True
+farm -> m3: doIrrigating(t46, 32)
+m3 ->m3: setIsAvailable(False)
+m3 -->m3
+m3 ->m3: this.handledThisTick+=1
+m3 --> m3:
+m3 -> m3:setLocation(t46)
+m3 --> m3:
+m3 -> t46: resetMoisture()
+t46 -> t46: this.currentMoisture = moistureCapacity
+t46 --> t46
+t46 --> m3:
+m3 -> t46: getPlant()
+t46 --> m3: p1
+m3 -> p1: setProgress(IRRIGATING, 32)
+p1 --> m3:
+m3 -> l: logFarmAction(3, IRRIGATING, 46, 4)
+l --> m3:
+m3 --> farm: True
+farm -> tm: getFieldsAndPlantationsSameFarmInRadius(34, t46, 2)
+tm --> farm: [t42, t43, t44, t48, t50, t52 ]
+farm -> farm: [t42, t43, t44, t48, t50, t52].getIntersection([t46, t50, t54])
+farm --> farm: [t50]
+farm -> m3: canHandle(PUMPKIN, t50)
+m3 -> m3: this.handledThisTick * this.duration <= 14
+m3 --> m3: True
+m3 -> tm: existsPath(t46, t50, 3, false)
+tm --> m3: True
+m3 --> farm: True
+farm -> m3: doIrrigating(t50, 32)
+m3 ->m3: setIsAvailable(False)
+m3 -->m3
+m3 ->m3: this.handledThisTick+=1
+m3 --> m3:
+m3 -> m3:setLocation(t50)
+m3 --> m3:
+m3 -> t50: resetMoisture()
+t50 -> t50: this.currentMoisture = moistureCapacity
+t50 --> t50
+t50 --> m3:
+m3 -> t50: getPlant()
+t50 --> m3: p2
+m3 -> p2: setProgress(IRRIGATING, 32)
+p2 --> m3:
+m3 -> l: logFarmAction(3, IRRIGATING, 50, 4)
+l --> m3:
+m3 --> farm: True
+farm -> tm: getFieldsAndPlantationsSameFarmInRadius(34, t46, 2)
+tm --> farm: [t43, t46, t48, t52]
+farm -> farm: [t43, t46, t48, t52].getIntersection([t46, t50, t54]).filter{it.isWorkedOnThisTick(32)}
+farm --> farm: []
+farm --> farm
+farm -> farm: getAvailableMachines()
+farm --> farm: []
+farm --> farm:
+farm -> l: logFarmFinish(34)
+l --> farm:
+farm --> s:
+ s--> s:
+
+end
+
+group IncidentsHappenPhase
+
+s -> s: incidentStart()
+s -> s: getIncidents()
+s --> s: []
+s --> s:
+
+end
+
+
+group ComputeHarvestPhase
+
+s -> s: computeHarvest()
+
+s -> tm: getFieldsAndPlantations()
+tm --> s: [t40, t42, t43, t44, t46, t48, t50, t52, t54]
+
+loop while Tile list is not empty
+s -> t40 : updateHarvestEstimate(32, 19)
+t40 -> t40 : isSowed(32)
+t40 --> t40 : true
+t40 -> t40 : resetHarvestAfterSowed()
+t40 --> t40:
+t40 -> t40 : getMissedAction()
+t40 --> t40 : missedActionList = []
+t40 -> t40 : missedActionList.isEmpty()
+t40 --> t40 : true
+t40 -> t40: applyEnvironmentalPenalty()
+t40 --> t40:
+t40 -> t40: applyMissedActionPenalty()
+t40 --> t40:
+t40 -> t40 : applyIncidentEffect()
+t40 --> t40 :
+t40 -> l : logHarvestEstimateChange(this.id, this.plant.currentEstimate, this.plant)
+l --> t40 :
+t40 --> s :
+end
+
+s --> s: 
+
+end
+
+
+
+@enduml

@@ -1,0 +1,102 @@
+{
+  "tiles": [
+    {
+      "id": 1,
+      "coordinates": {
+        "x": -1,
+        "y": -1
+      },
+      "category": "FARMSTEAD",
+      "airflow": true,
+      "direction": "135",
+      "farm": 1,
+      "shed": true
+    },
+    {
+      "id": 2,
+      "coordinates": {
+        "x": 1,
+        "y": -1
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 3,
+      "coordinates": {
+        "x": 3,
+        "y": -1
+      },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 4,
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": true,
+      "direction": "90",
+      "farm": 1,
+      "capacity": 1000,
+      "possiblePlants": ["POTATO", "WHEAT"]
+    },
+
+    {
+      "id": 6,
+      "coordinates": {
+        "x": -1,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 7,
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "category": "FOREST",
+      "airflow": false
+    },
+    {
+      "id": 8,
+      "coordinates": {
+        "x": 3,
+        "y": 1
+      },
+      "category": "FARMSTEAD",
+      "airflow": false,
+      "farm": 1,
+      "shed": true
+    },
+    {
+      "id": 11,
+      "coordinates": {
+        "x": -1,
+        "y": 3
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 12,
+      "coordinates": {
+        "x": 1,
+        "y": 3
+      },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 13,
+      "coordinates": {
+        "x": 3,
+        "y": 3
+      },
+      "category": "FOREST",
+      "airflow": false
+    }
+  ]
+}

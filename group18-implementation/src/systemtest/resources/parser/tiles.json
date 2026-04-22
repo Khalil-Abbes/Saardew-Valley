@@ -1,0 +1,334 @@
+{
+  "tiles": [
+    {
+      "id": 20,
+      "coordinates": {
+        "x": 4,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 21,
+      "coordinates": {
+        "x": 6,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 22,
+      "coordinates": {
+        "x": 8,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 23,
+      "coordinates": {
+        "x": 9,
+        "y": 5
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "315"
+    },
+    {
+      "id": 24,
+      "coordinates": {
+        "x": 10,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": false
+    },
+    {
+      "id": 30,
+      "coordinates": {
+        "x": 11,
+        "y": 5
+      },
+      "category": "FARMSTEAD",
+      "airflow": false,
+      "farm": 0,
+      "shed": true
+    },
+    {
+      "id": 18,
+      "coordinates": {
+        "x": 2,
+        "y": 4
+      },
+      "plant": "ALMOND",
+      "category": "PLANTATION",
+      "airflow": true,
+      "direction": "270",
+      "farm": 0,
+      "capacity": 200
+    },
+    {
+      "id": 17,
+      "coordinates": {
+        "x": 0,
+        "y": 4
+      },
+      "plant": "CHERRY",
+      "category": "PLANTATION",
+      "airflow": true,
+      "direction": "270",
+      "farm": 0,
+      "capacity": 1000
+    },
+    {
+      "id": 150,
+      "coordinates": {
+        "x": -2,
+        "y": 4
+      },
+      "plant": "CHERRY",
+      "category": "PLANTATION",
+      "airflow": true,
+      "direction": "225",
+      "farm": 0,
+      "capacity": 1000
+    },
+    {
+      "id": 120,
+      "coordinates": {
+        "x": -4,
+        "y": 4
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 3,
+      "coordinates": {
+        "x": -5,
+        "y": 5
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 16,
+      "coordinates": {
+        "x": -3,
+        "y": 5
+      },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 11,
+      "coordinates": {
+        "x": 6,
+        "y": 2
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 13,
+      "coordinates": {
+        "x": 8,
+        "y": 2
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 12,
+      "coordinates": {
+        "x": 8,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": true,
+      "direction": "270",
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 10,
+      "coordinates": {
+        "x": 6,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": true,
+      "direction": "225",
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 42,
+      "coordinates": {
+        "x": 10,
+        "y": 2
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 666,
+      "coordinates": {
+        "x": 10,
+        "y": 0
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 777,
+      "coordinates": {
+        "x": 11,
+        "y": 3
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 888,
+      "coordinates": {
+        "x": 11,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 555,
+      "coordinates": {
+        "x": 11,
+        "y": -1
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 8,
+      "coordinates": {
+        "x": 4,
+        "y": 0
+      },
+      "category": "ROAD",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 9,
+      "coordinates": {
+        "x": 5,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": true,
+      "direction": "315"
+    },
+    {
+      "id": 485,
+      "coordinates": {
+        "x": 4,
+        "y": 2
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 486,
+      "coordinates": {
+        "x": 5,
+        "y": 3
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 484,
+      "coordinates": {
+        "x": 3,
+        "y": 3
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 483,
+      "coordinates": {
+        "x": 7,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 482,
+      "coordinates": {
+        "x": 9,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 481,
+      "coordinates": {
+        "x": 7,
+        "y": 3
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 479,
+      "coordinates": {
+        "x": 9,
+        "y": 3
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 116,
+      "coordinates": {
+        "x": -1,
+        "y": 5
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 15,
+      "coordinates": {
+        "x": 1,
+        "y": 5
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 19,
+      "coordinates": {
+        "x": 3,
+        "y": 5
+      },
+      "category": "MEADOW",
+      "airflow": false
+    }
+  ]
+}

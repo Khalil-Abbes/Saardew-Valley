@@ -1,0 +1,6 @@
+{
+  "tiles": [
+    { "id": 0, "coordinates": { "x": 1, "y": 1 }, "category": "FARMSTEAD", "farm": 0, "shed": true, "airflow": false },
+    { "id": 2, "coordinates": { "x": 2, "y": 2 }, "category": "PLANTATION", "farm": 0, "capacity": 8000, "plant": "APPLE", "airflow": false }
+  ]
+}

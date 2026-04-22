@@ -1,0 +1,42 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Farm A",
+      "farmsteads": [0],
+      "fields": [12],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 0,
+          "name": "SeederA",
+          "actions": ["SOWING"],
+          "plants": ["WHEAT"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": [
+        { "id": 5, "tick": 0, "plant": "WHEAT", "fields": [12] }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Farm B",
+      "farmsteads": [32],
+      "fields": [16],
+      "plantations": [22],
+      "machines": [
+        {
+          "id": 1,
+          "name": "HarvesterB",
+          "actions": ["HARVESTING"],
+          "plants": ["WHEAT", "APPLE"],
+          "duration": 3,
+          "location": 32
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

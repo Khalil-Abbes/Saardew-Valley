@@ -1,0 +1,245 @@
+package de.unisaarland.cs.se.selab.systemtest.selab25.mutants.validation
+
+import de.unisaarland.cs.se.selab.systemtest.selab25.utils.ExampleSystemTestExtension
+
+/**
+ * wrong neighbor adjacent tiles
+ */
+class FieldPerFieldPlant : ExampleSystemTestExtension() {
+    override val name = "FieldPerFieldPlant"
+    override val description = "Checks normal field plant actions/periods without incidents."
+
+    // Paths are relative from the `src/systemtest/resources` directory.
+    override val farms = "mutants/FieldPerFieldPlant/farms.json"
+    override val scenario = "mutants/FieldPerFieldPlant/scenario.json"
+    override val map = "mutants/FieldPerFieldPlant/map.json"
+
+    override val logLevel = "DEBUG"
+    override val maxTicks = 25
+    override val startYearTick = 1
+
+    val expectedOutput = """
+[INFO] Initialization Info: map.json successfully parsed and validated.
+[INFO] Initialization Info: farms.json successfully parsed and validated.
+[INFO] Initialization Info: scenario.json successfully parsed and validated.
+[INFO] Simulation Info: Simulation started at tick 1 within the year.
+[INFO] Simulation Info: Tick 0 started at tick 1 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 1 started at tick 2 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 2 started at tick 3 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 3 started at tick 4 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 4 started at tick 5 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 5 started at tick 6 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: 202.
+[IMPORTANT] Farm Action: Machine 101 performs SOWING on tile 12 for 2 days.
+[IMPORTANT] Farm Sowing: Machine 101 has sowed OAT according to sowing plan 202.
+[IMPORTANT] Farm Machine: Machine 101 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 1080000 g of OAT.
+[INFO] Simulation Info: Tick 6 started at tick 7 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: 203.
+[IMPORTANT] Farm Action: Machine 101 performs SOWING on tile 14 for 2 days.
+[IMPORTANT] Farm Sowing: Machine 101 has sowed POTATO according to sowing plan 203.
+[IMPORTANT] Farm Machine: Machine 101 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 12 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 874800 g of OAT.
+[INFO] Simulation Info: Tick 7 started at tick 8 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 12 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Action: Machine 104 performs IRRIGATING on tile 14 for 2 days.
+[IMPORTANT] Farm Machine: Machine 104 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 708588 g of OAT.
+[INFO] Simulation Info: Tick 8 started at tick 9 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 12 for 2 days.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 14 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 516560 g of OAT.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 900000 g of POTATO.
+[INFO] Simulation Info: Tick 9 started at tick 10 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 104 performs IRRIGATING on tile 12 for 2 days.
+[IMPORTANT] Farm Machine: Machine 104 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 376571 g of OAT.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 810000 g of POTATO.
+[INFO] Simulation Info: Tick 10 started at tick 11 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: 204.
+[IMPORTANT] Farm Action: Machine 101 performs SOWING on tile 16 for 2 days.
+[IMPORTANT] Farm Sowing: Machine 101 has sowed PUMPKIN according to sowing plan 204.
+[IMPORTANT] Farm Machine: Machine 101 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 14 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 274518 g of OAT.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 729000 g of POTATO.
+[DEBUG] Harvest Estimate: Required actions on tile 16 were not performed: IRRIGATING.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 449850 g of PUMPKIN.
+[INFO] Simulation Info: Tick 11 started at tick 12 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 104 performs IRRIGATING on tile 16 for 2 days.
+[IMPORTANT] Farm Machine: Machine 104 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 12 changed to 200123 g of OAT.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 656100 g of POTATO.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 404865 g of PUMPKIN.
+[INFO] Simulation Info: Tick 12 started at tick 13 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 103 performs HARVESTING on tile 12 for 2 days.
+[IMPORTANT] Farm Harvest: Machine 103 has collected 200123 g of OAT harvest.
+[IMPORTANT] Farm Machine: Machine 103 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Machine: Machine 103 unloads 200123 g of OAT harvest in the shed.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 14 for 2 days.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 16 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 590490 g of POTATO.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 364378 g of PUMPKIN.
+[INFO] Simulation Info: Tick 13 started at tick 14 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 104 performs IRRIGATING on tile 14 for 2 days.
+[IMPORTANT] Farm Machine: Machine 104 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 14 changed to 531441 g of POTATO.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 327940 g of PUMPKIN.
+[INFO] Simulation Info: Tick 14 started at tick 15 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 14 for 2 days.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 16 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 295146 g of PUMPKIN.
+[INFO] Simulation Info: Tick 15 started at tick 16 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 265631 g of PUMPKIN.
+[INFO] Simulation Info: Tick 16 started at tick 17 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 103 performs HARVESTING on tile 14 for 2 days.
+[IMPORTANT] Farm Harvest: Machine 103 has collected 531441 g of POTATO harvest.
+[IMPORTANT] Farm Machine: Machine 103 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Machine: Machine 103 unloads 531441 g of POTATO harvest in the shed.
+[IMPORTANT] Farm Action: Machine 102 performs WEEDING on tile 16 for 2 days.
+[IMPORTANT] Farm Machine: Machine 102 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[DEBUG] Harvest Estimate: Required actions on tile 16 were not performed: IRRIGATING.
+[INFO] Harvest Estimate: Harvest estimate on tile 16 changed to 265581 g of PUMPKIN.
+[INFO] Simulation Info: Tick 17 started at tick 18 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 1 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm Action: Machine 103 performs HARVESTING on tile 16 for 2 days.
+[IMPORTANT] Farm Harvest: Machine 103 has collected 265581 g of PUMPKIN harvest.
+[IMPORTANT] Farm Machine: Machine 103 is finished and returns to the shed at 1.
+[IMPORTANT] Farm Machine: Machine 103 unloads 265581 g of PUMPKIN harvest in the shed.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 18 started at tick 19 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: 201.
+[IMPORTANT] Farm Action: Machine 101 performs SOWING on tile 10 for 2 days.
+[IMPORTANT] Farm Sowing: Machine 101 has sowed WHEAT according to sowing plan 201.
+[IMPORTANT] Farm Machine: Machine 101 is finished and returns to the shed at 1.
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[DEBUG] Harvest Estimate: Required actions on tile 10 were not performed: IRRIGATING.
+[INFO] Harvest Estimate: Harvest estimate on tile 10 changed to 0 g of WHEAT.
+[INFO] Simulation Info: Tick 19 started at tick 20 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 20 started at tick 21 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 21 started at tick 22 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 22 started at tick 23 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 23 started at tick 24 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[INFO] Simulation Info: Tick 24 started at tick 1 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Farm: Farm 1 starts its actions.
+[DEBUG] Farm: Farm 1 has the following active sowing plans it intends to pursue in this tick: .
+[IMPORTANT] Farm: Farm 1 finished its actions.
+[IMPORTANT] Simulation Info: Simulation ended at tick 25.
+[IMPORTANT] Simulation Info: Simulation statistics are calculated.
+[IMPORTANT] Simulation Statistics: Farm 1 collected 997145 g of harvest.
+[IMPORTANT] Simulation Statistics: Total amount of POTATO harvested: 531441 g.
+[IMPORTANT] Simulation Statistics: Total amount of WHEAT harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of OAT harvested: 200123 g.
+[IMPORTANT] Simulation Statistics: Total amount of PUMPKIN harvested: 265581 g.
+[IMPORTANT] Simulation Statistics: Total amount of APPLE harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of GRAPE harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of ALMOND harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of CHERRY harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total harvest estimate still in fields and plantations: 0 g.
+    """
+
+    override suspend fun run() {
+        val expectedLines = expectedOutput.split("\n").map { it.trim() }.filter { it.isNotEmpty() }
+
+        for (line in expectedLines) {
+            assertNextLine(line)
+        }
+    }
+}

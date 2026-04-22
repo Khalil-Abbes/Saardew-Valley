@@ -1,0 +1,29 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Pumpkin Farm",
+      "farmsteads": [1],
+      "fields": [2],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Sower",
+          "actions": ["SOWING"],
+          "plants": ["PUMPKIN"],
+          "duration": 2,
+          "location": 1
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 0,
+          "tick": 0,
+          "plant": "PUMPKIN",
+          "fields": [2]
+        }
+      ]
+    }
+  ]
+}

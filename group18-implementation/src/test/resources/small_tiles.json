@@ -1,0 +1,69 @@
+{
+  "tiles": [
+    {
+      "id": 0,
+      "coordinates": {
+        "x": 3,
+        "y": 7
+      },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 26,
+      "coordinates": {
+        "x": 4,
+        "y": 6
+      },
+      "category": "FOREST",
+      "airflow": false
+    },
+    {
+      "id": 40,
+      "coordinates": {
+        "x": 5,
+        "y": 7
+      },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 20,
+      "coordinates": {
+        "x": 4,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 21,
+      "coordinates": {
+        "x": 6,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 22,
+      "coordinates": {
+        "x": 8,
+        "y": 4
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "270"
+    },
+    {
+      "id": 23,
+      "coordinates": {
+        "x": 9,
+        "y": 5
+      },
+      "category": "FOREST",
+      "airflow": true,
+      "direction": "315"
+    }
+  ]
+}

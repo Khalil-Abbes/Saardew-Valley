@@ -1,0 +1,42 @@
+{
+  "clouds": [
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "type": "ANIMAL_ATTACK",
+      "tick": 4,
+      "location": 2,
+      "radius": 100
+    },
+    {
+      "id": 2,
+      "type": "DROUGHT",
+      "tick": 5,
+      "location": 51,
+      "radius": 1
+    },
+    {
+      "id": 3,
+      "type": "DROUGHT",
+      "tick": 5,
+      "location": 55,
+      "radius": 1
+    },
+    {
+      "id": 4,
+      "type": "BROKEN_MACHINE",
+      "tick": 5,
+      "duration" : 1,
+      "machineId": 3
+    },
+    {
+      "id": 5,
+      "type": "BROKEN_MACHINE",
+      "tick": 5,
+      "duration" : 1,
+      "machineId": 4
+    }
+  ]
+
+}

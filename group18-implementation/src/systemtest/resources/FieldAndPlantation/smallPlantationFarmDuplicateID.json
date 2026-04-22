@@ -1,0 +1,31 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Small Plantation Farm",
+      "farmsteads": [1, 8, 8],
+      "fields": [],
+      "plantations": [4, 5, 5, 9, 10],
+      "machines": [
+        {
+          "id": 1,
+          "name": "IrrigatingTractor",
+          "actions": ["IRRIGATING"],
+          "plants": ["CHERRY", "ALMOND", "GRAPE", "APPLE"],
+          "duration": 4,
+          "location": 1
+        },
+        {
+          "id": 2,
+          "name": "PlantationTractor",
+          "actions": ["HARVESTING", "CUTTING", "MOWING"],
+          "plants": ["CHERRY", "ALMOND", "GRAPE", "APPLE"],
+          "duration": 4,
+          "location": 1
+        }
+      ],
+      "sowingPlans": [
+      ]
+    }
+  ]
+}

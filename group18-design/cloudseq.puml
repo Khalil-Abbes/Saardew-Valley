@@ -1,0 +1,174 @@
+@startuml name
+autoactivate on
+participant Main as m
+participant Simulation as s
+participant "ch: CloudHandler" as ch
+participant "c: Cloud" as c
+participant "t: Tile" as t
+participant "co: Coordinates" as co
+participant "field:Field" as f
+participant "logger: Logger" as l
+participant "SimulationMap" as sm
+participant "f34: Farm" as farm
+participant "m1: Machine" as m1
+participant "w: FieldPlant" as w
+participant "p: FieldPlant" as p
+s -> s: run()
+s -> s: runTick(32)
+s -> s: reduceSoilMoisture()
+s -> s: getFields()
+s --> s: fields
+loop for each field in fields
+group Tile 44, 43, 48
+s -> f: getPlant()
+f --> s: p
+s -> s: isNull(p)
+s --> s: True
+s -> f: reduceSoilMoisture(70)
+f --> s:
+s -> f: moistureBelowThreshold()
+f --> s: True
+end
+group Tile 40, 42, 46, 50, 52, 54
+s -> f: getPlant()
+f --> s: p
+s -> s: isNull(p)
+s --> s: False
+s -> f: reduceSoilMoisture(100)
+f --> s:
+s -> f: moistureBelowThreshold()
+f --> s: True
+end
+s -> l: logSoilMosture(9, 0)
+l --> s:
+s --> s:
+
+s -> ch: handleClouds()
+group CloudPhase
+ch -> ch: run(clouds)
+    loop for cloud in clouds
+        ch -> c: cloud.getDuration(0)
+        c --> ch: duration
+        loop while (duration > 0)
+            group Raining
+                ch -> c: cloud.getAmount()
+                c --> ch: cloudWater
+                alt cloudWater >= 5000
+                    ch -> ch: rain(cloud)
+
+                    ch -> c: cloud.getLocation()
+                    c --> ch: cloudLoc
+                    ch -> s: getData()
+                    s --> ch: data
+                    ch -> ch: data.getTileById(cloudLoc)
+                    ch --> ch: cloudyTile
+
+                    ch -> t: cloudyTile.getCategory()
+                    t --> ch: cat
+                    alt cat == FIELD || cat == PLANTATION
+                        ch -> t: cloudyTile.getNeededWaterToMaxMoisture()
+                        t -> t: cloudyTile.getCurrentMoisture()
+                        t --> t: cm
+                        t -> t: cloudyTile.getMoistureCapacity()
+                        t --> t: mc
+                        t --> ch: neededWater := mc - cm
+
+                        ch -> c: cloud.getAmount()
+                        c --> ch: cloudWater
+                        ch -> ch: newCapacity := cloudWater + neededWater
+                        alt cloudWater <= neededWater
+                            ch -> ch: rainEverything(cloud, newCapacity)
+                            
+                            ch -> c: cloud.getLocation()
+                            c --> ch: cloudLoc
+                            ch -> s: getData()
+                            s --> ch: data
+                            ch -> ch: data.getTileById(cloudLoc)
+                            ch --> ch: cloudyTile
+
+                            ch -> t: cloudyTile.setCurrentCapacity(newCapacity)
+                            t --> ch
+                            ch -> ch: removeCloud(cloud)
+                            ch -> c: cloud.getId()
+                            c --> ch: id
+                            ch -> ch: clouds.removeAll {it.id == id}
+                            ch --> ch
+                            ch --> ch
+                            ch --> ch
+                            ch --> ch
+                        else cloudWater > neededWater
+                            ch -> ch: rainToFillTile(cloud, neededWater)
+                            ch -> t: cloudyTile.getMoistureCapacity()
+                            t --> ch: capacity
+                            ch -> t: cloudyTile.setCurrentCapacity(capacity)
+                            t --> ch
+                            ch -> c: cloud.getAmount()
+                            c --> ch: oldAmount
+                            ch -> c: cloud.setAmount(oldAmount - neededWater)
+                            c --> ch
+                            ch --> ch
+                        end
+                    else cat != FIELD && cat != PLANTATION
+                        ch -> ch: removeCloud(cloud)
+                        ch -> c: cloud.getId()
+                        c --> ch: id
+                        ch -> ch: clouds.removeAll {it.id == id}
+                        ch --> ch
+                        ch --> ch
+                    end
+                end
+            end
+            ch -> c: cloud.getLocation()
+            c --> ch: cloudLoc
+            ch -> s: getData()
+            s --> ch: data
+            ch -> ch: data.getTileById(cloudLoc)
+            ch --> ch: cloudyTile
+            ch -> sm: getNeighbourTile(cloudyTile)
+            ch -> t: cloudyTile.getDirection()
+            t --> ch: direction
+            alt direction == None
+                ch --> ch
+            end
+
+            ch -> t: cloudyTile.getCategory()
+            t --> ch: cat
+            alt cloudyTile == None
+                ch --> ch
+            else cat == VILLAGE
+                ch -> ch: removeCloud(cloud)
+                ch -> c: cloud.getId()
+                c --> ch: id
+                ch -> ch: clouds.removeAll {it.id == id}
+                ch --> ch
+                ch --> ch
+            else
+                group Moving
+                    ch -> t: cloudyTile.getCoordinates()
+                    t --> ch: coords
+                    ch -> co: coords.getX()
+                    co --> ch: x 
+                    ch -> co: coords.getY()
+                    co --> ch: y
+                    ch -> co: Coordinates(x + 2*sin(direction), y - 2*cos(direction))
+                    co --> ch: destinationCoords
+                    ch -> sm: getTileByCoords(destinationCoords)
+                    sm --> ch: destTile
+                    ch -> ch: moveCloud(cloud)
+                    ch -> c: cloud.getLocation()
+                    c --> ch: cloudLoc
+                    ch -> s: getData()
+                    s --> ch: data
+                    ch -> ch: data.getTileById(cloudLoc)
+                    ch --> ch: cloudyTile
+                    ch -> t: cloudyTile.getAirflow
+                end                
+            end
+        end
+        ch -> ch: removeCloud(cloud)
+        ch -> c: cloud.getId()
+        c --> ch: id
+        ch -> ch: clouds.removeAll {it.id == id}
+        ch --> ch
+    end
+ch --> s:

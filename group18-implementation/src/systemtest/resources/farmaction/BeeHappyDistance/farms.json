@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Range Farm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [2, 6, 14],
+      "machines": [
+        {
+          "id": 0,
+          "name": "IdleHarvester",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE"],
+          "duration": 3,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "tiles": [
+    {
+      "id": 1,
+      "coordinates": {
+        "x": -1,
+        "y": -1
+      },
+      "category": "FARMSTEAD",
+      "airflow": true,
+      "direction": "135",
+      "farm": 1,
+      "shed": true
+    },
+    {
+      "id": 2,
+      "coordinates": {
+        "x": 1,
+        "y": -1
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 4,
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": true,
+      "direction": "90",
+      "farm": 1,
+      "capacity": 1000,
+      "possiblePlants": ["POTATO"]
+    },
+    {
+      "id": 6,
+      "coordinates": {
+        "x": -1,
+        "y": 1
+      },
+      "category": "ROAD",
+      "airflow": false
+    }
+
+  ]
+}

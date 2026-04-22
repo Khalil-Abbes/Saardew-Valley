@@ -1,0 +1,12 @@
+{
+  "clouds": [
+  ],
+  "incidents": [
+    {
+      "id": 2,
+      "type": "CITY_EXPANSION",
+      "tick": 1,
+      "location": 2
+    }
+  ]
+}

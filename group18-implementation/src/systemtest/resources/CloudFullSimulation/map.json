@@ -1,0 +1,146 @@
+{
+  "tiles": [
+    {
+      "airflow": true,
+      "capacity": 5000,
+      "category": "FIELD",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "90",
+      "farm": 1,
+      "id": 1,
+      "possiblePlants": [
+        "PUMPKIN"
+      ]
+    },
+    {
+      "airflow": true,
+      "capacity": 5000,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "180",
+      "farm": 1,
+      "id": 2,
+      "plant": "CHERRY"
+    },
+    {
+      "airflow": false,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 4,
+        "y": 0
+      },
+      "id": 3
+    },
+    {
+      "airflow": true,
+      "category": "MEADOW",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "45",
+      "id": 4
+    },
+    {
+      "category": "VILLAGE",
+      "coordinates": {
+        "x": 3,
+        "y": 1
+      },
+      "id": 5
+    },
+    {
+      "airflow": false,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 0,
+        "y": 2
+      },
+      "id": 6
+    },
+    {
+      "airflow": true,
+      "capacity": 5000,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 2,
+        "y": 2
+      },
+      "direction": "315",
+      "farm": 1,
+      "id": 7,
+      "plant": "CHERRY"
+    },
+    {
+      "airflow": true,
+      "category": "ROAD",
+      "coordinates": {
+        "x": 4,
+        "y": 2
+      },
+      "direction": "45",
+      "id": 8
+    },
+    {
+      "airflow": true,
+      "category": "MEADOW",
+      "coordinates": {
+        "x": -1,
+        "y": -1
+      },
+      "direction": "135",
+      "id": 9
+    },
+    {
+      "category": "VILLAGE",
+      "coordinates": {
+        "x": 2,
+        "y": -2
+      },
+      "id": 10
+    },
+    {
+      "airflow": true,
+      "category": "MEADOW",
+      "coordinates": {
+        "x": 3,
+        "y": -1
+      },
+      "direction": "225",
+      "id": 11
+    },
+    {
+      "airflow": true,
+      "capacity": 5000,
+      "category": "FIELD",
+      "coordinates": {
+        "x": 4,
+        "y": -2
+      },
+      "direction": "270",
+      "farm": 1,
+      "id": 12,
+      "possiblePlants": [
+        "PUMPKIN"
+      ]
+    },
+    {
+      "airflow": true,
+      "category": "FARMSTEAD",
+      "coordinates": {
+        "x": 5,
+        "y": -1
+      },
+      "direction": "225",
+      "farm": 1,
+      "id": 13,
+      "shed": true
+    }
+  ]
+}

@@ -1,0 +1,660 @@
+@startuml SAARDEW_VALLEY
+
+
+package Tile #pink {
+
+class Tile   {
+    - id: Int
+    - coordinate: Coordinate
+    - categoryType: TileCategory
+    - shed: Boolean
+    - farm: Int?
+    - direction: Direction?
+}
+
+abstract class FarmableTile {
+    - moistureCapacity: Int
+    - currentMoisture: Int
+    - currentHarvestEstimate: Int
+    - sunlightThisTick: Int
+    - beeBonusThisTickPct: Int
+    - farm: Int
+    - incidentOrderListThisTick: List<Incident>
+    + killPlant(): Unit
+    + pollinate(): Unit
+    + reduceSoilMoisture(amount: Int): Unit
+    + getNeededWaterToMaxMoisture(): Int
+    + moistureBelowThreshold(): Boolean
+    + decreaseSunlightPerCloudTraverse(): Unit
+    + getMissedActions(): List<ActionType>
+    + updateHarvestEstimate(currentYearTick: YearTick, currentTick: Int): Unit
+    + setPlant(plant: Plant): Unit
+    + isWorkedOnThisTick(currentTick: Int): Boolean
+    - setInitialHarvestOnPlantationIfNovember(currentYearTick: YearTick) : Unit
+    - resetHarvestAfterSowed() : Unit
+    - applySowingLatePenalty() : Unit
+    - applyEnvironmentalPenalty() : Unit
+    - applyActionPenalty(): Unit
+    - applyIncidentPenalty() : Unit
+}
+
+class Field {
+    - plant: FieldPlant?
+    - possiblePlants: List<PlantType>
+    - sowTick: Int?
+    - weedingDoneTicks: Set<Int>
+    - fallowUntilTick: Int?
+    +setPlant(plant: FieldPlant): Unit
+    +canBeSowed(current_tick: Int, year_tick: YearTick): Boolean
+    +isSowed(currentTick : int) : Boolean
+}
+
+
+Field -|> FarmableTile
+class Plantation {
+    - plant: PlantationPlant
+    - cutThisCycle: Boolean
+    - mowingDoneTicks: Set<Int>
+    - harvestedThisTick: Boolean
+    - operatedOnThisTick: Boolean
+    - permanentDisabled: Boolean
+    + setPlant(plant: PlantationPlant)
+    - setInitialHarvestOnPlantationInNovember() : Unit
+}
+}
+
+package Cloud #orange {
+class Cloud {
+    - id: Int
+    - duration: Int
+    - location: Int
+    - amount: Int
+    - availableMovesLeft = 10: Int
+}
+
+class CloudHandler {
+    - tileManager: TileManager
+    - clouds: List<Cloud>
+    + run()
+    + createCloud(location: Int, radius: Int, duration: Int, amount: Int)
+    + removeCloud(cloud: Cloud): Unit
+    - getHighestCloudId(): Int
+    - decreaseCloudyTilesSunlight(): Unit
+    - moveCloud(cloud: Cloud): Unit
+    - isOnVillage(cloud: Cloud): Boolean
+    - rain(cloud: Cloud): Unit
+    - rainToFillTile(cloud: Cloud, amount: Int): Unit
+    - rainToEmptyCloud(cloud: Cloud, amount: Int): Unit
+    - checkCollision(cloud: Cloud): Cloud?
+    - merge(cloud1: Cloud, cloud2: Cloud) : Unit
+}
+}
+
+
+package Farm #yellow {
+class Farm {
+    - id: Int
+    - name: String
+    - farmsteads: List<Tile>
+    - fields: List<Field>
+    - plantations: List<Plantation>
+    - machines: List<Machine>
+    - machineToShed: Map<Machine, Farmstead>
+    - totalHarvestByPlant: Map<PlantType, Int>
+    - sowingPlans : List<SowingPlan>
+    + run(currentTick: Int, currentYearTick: Int): Unit
+    - executePlan(sp: SowingPlan)
+    - sowFields(currentTick: Int, yearTick: Int)
+    - harvestFields(currentTick: Int, yearTick: Int)
+    - harvestPlantations(currentTick: Int, yearTick: YearTick): Unit
+    - doRemainingActions(currentTick: Int, yearTick: YearTick): Unit
+    - getFulfillableSowingPlans(currentTick: Int, yearTick: YearTick): List<SowingPlan>
+    - getPlantationsWithHarvestablePlants(currentTick: Int, yearTick: YearTick): List<Plantation>
+    - getFieldsWithHarvestablePlants(currentTick: Int, yearTick: YearTick): List<Field>
+    - getFieldsWithIrrigatingPlants(tileType: PlantType): List<Field>
+    - getAvailableHarvestingMachines(): List<Machine>
+    - getAvailableSowingMachines(): List<Machine>
+    - getAvailableMachines(): List<Machine>
+}
+
+class Machine {
+    - tileManager: TileManager
+    - id: Int
+    - name: String
+    - actions: List<ActionType>
+    - designatedPlants: List<PlantType>
+    - duration: Int
+    - location: Tile
+    - repairDuration: Int
+    - isAvailable: Boolean
+    - homeShed: Int
+    - cargo: Map<PlantType, Int>
+    - sowingDoneTick: Int?
+    - handledThisTick: Int
+    + performAction(action: ActionType): Unit
+    ' doSowing function: updates the location of the machine, sets isAvailable to false,
+    - doSowing(tile: Tile, currentTick: Int, yearTick: YearTick, plant: PlantType): Boolean
+    - doHarvesting(tile: Tile, currentTick: Int, yearTick; YearTick): Boolean
+    - doCutting(tile: Tile, currentTick: Int): Boolean
+    - doMowing(tile: Tile, currentTick: Int): Boolean
+    - doIrrigating(tile: Tile, currentTick: Int): Boolean
+    - doWeeding(tile: Tile, currentTick: Int): Boolean
+    - returnToFarmstead(farmstead: Tile): Boolean
+    - canHandle(plantType: plantType, tile: FarmableTile): Boolean
+    - restoreAvailability()
+}
+
+class SowingPlan {
+    - id : Int
+    - tick : Int
+    - plantType : PlantType
+    - fields : List<Field>?
+    - location : Int?
+    - radius : Int?
+    - fulfilled: Boolean
+}
+}
+
+
+package Incidents #lightblue {
+
+
+abstract class Incident {
+  # id: Int
+  # tick: Int
+  {abstract} + perform(): Unit
+}
+
+class CloudCreationIncident {
+  - cloudHandler: CloudHandler
+  - duration: Int
+  - location: Int
+  - radius: Int
+  - amount: Int
+  + perform(): Unit
+}
+
+class BeeHappyIncident {
+  - tileManager: TileManager
+  - location: Int
+  - radius: Int
+  - effect: Int
+  + perform(): Unit
+}
+
+class DroughtIncident {
+    - tileManager: TileManager
+    - location: Int
+    - radius: Int
+    + perform(): Unit
+}
+
+class BrokenMachineIncident {
+    - farms: List<Farm>
+    - duration: Int
+    - machineID: Int
+    + perform(): Unit
+}
+
+class CityExpansionIncident {
+    - farms: List<Farm>
+    - tileManager: TileManager
+    - location: Int
+    + perform(): Unit
+}
+
+class AnimalAttackIncident {
+    - tileManager: TileManager
+    - location : Int
+    - radius: Int
+
+    +perform(): Unit
+}
+}
+
+package Simulation #lightgreen {
+class Main {
+  - main(): Unit
+}
+
+class Simulation {
+  - incidents: List<Incident>
+  - farms: Map<Int,Farm>
+  - cloudHandler: CloudHandler
+  - tileManager: TileManager
+
+  - currentTick: Int
+  - currentYearTick: YearTick
+  - maxTick: Int
+
+  + run(): Unit
+  - runTick(currentTick: Int, currentYearTick: YearTick): Unit
+  - farmAction(currentTick: Int, currentYearTick: Int): Unit
+  - handleClouds(): Unit
+  - reduceSoilMoisture(): Unit
+  - incidentStart(): Unit
+  - computeHarvest(): Unit
+}
+
+
+class TileManager {
+    - idToTile: Map<Int,Tile>
+    - coordinateToTile: Map<Coordinate,Tile>
+    + getTileById(id: Int): Tile?
+    + getTileByCoords(coords: Coordinate): Tile?
+    + getNeighborInDirection(tile: Tile): Tile?
+    + getAllNeighborTilesInRadius(tile: Tile, radius: Int): List<Tile>
+    + getFieldsAndPlantationsSameFarmInRadius(farmID: Int, tile:Tile, radius: Int): List<FarmableTile>
+    + updateTile(newTile: Tile): Unit
+    + shortestPathLength(start: Tile, target: Tile): Int?
+    + existsPath(start:Tile, target: Tile, farmID: Int, hasHarvest: Boolean): Boolean
+    + getFields(): List<Field>
+    + getPlantations(): List<Plantation>
+}
+
+class Coordinate {
+    - x: Int
+    - y: Int
+    + getNeighborCoordinateInDirection(direction: Direction): Coordinate
+    + getAllNeighbors(): List<Coordinate>
+    + equals(coordinate: Coordinate): Boolean
+}
+
+}
+package Logger #red {
+
+object LoggerFacade {
+  - concreteLogger: ImportantLogger
+  + logInvalidFile(filename:String)
+  + logSimulationEnd(tick: Int)
+  + logCloudRain(cloudID: Int, tileID: Int, amount: Int)
+  + logCloudUnion(cloudIDFromTile: Int, cloudIDMovingToTile: Int, cloudIDNew: Int, amount: Int, duration: Int, tileID: Int)
+  + logFarmStart(FarmID: Int)
+  + logFarmAction(machineID: Int, actionType: Action, tileID: Int, duration: Int)
+  + logFarmSowing(machineID: Int, plant: Plant, sowingPlanID : Int)
+  + logFarmHarvest(machineID: Int, amount: Int, plant: Plant)
+  + logMachineReturn(machineID: Int, tileID: Int)
+  + logMachineUnload(machineID: Int, amount: Int,plant: Plant)
+  + logFarmFinish(farmID: Int)
+  + logIncident(incidentID: Int, incidentType: Incident, tileIDs: List<Int>)
+  + logSimulationInfo()
+  + logHarvestCollect(farmID: Int, amount: Int)
+  + logTotalHarvest(plant: Plant, amount: Int)
+  + logHarvestEstimate(amount: Int)
+  + logParseSuccess(filename: String)
+  + logSimulationStart(yearTick: YearTick)
+  + logTickStart(tick: Int, yearTick: YearTick)
+  + logSoilMoisture(amountField: Int, amountPlantation: Int)
+  + logCloudMovement(cloudID: Int, amountFluid: Int, startTileID: Int, endTileID: Int)
+  + logCloudStuck(cloudID: Int, tileID: Int)
+  + logCloudDissipation(cloudID: Int, tileID: Int)
+  + logHarvestEstimateChange(tileID: Int, amount: Int, plant: Plant)
+  + logCloudMovement(startTileID: Int, amountSunLight: Int)
+  + logCloudPosition(cloudID: Int, tileID: Int, amountSunLight: Int)
+  + logHarvestEstimate(tileID: Int, actions: List<ActionType>)
+  + logMachineReturnFail(machineID: Int)
+  + logFarmActiveSowingPlans(farmID : Int, sowingPlansIDS : List<Int>)
+}
+
+class ImportantLogger {
+    # logFile: File?
+    + logInvalidFile(filename:String)
+    + logSimulationEnd(tick: Int)
+    + logCloudRain(cloudID: Int, tileID: Int, amount: Int)
+    + logCloudUnion(cloudIDFromTile: Int, cloudIDMovingToTile: Int, cloudIDNew: Int, amount: Int, duration: Int, tileID: Int)
+    + logFarmStart(FarmID: Int)
+    + logFarmAction(machineID: Int, actionType: Action, tileID: Int, duration: Int)
+    + logFarmSowing(machineID: Int, plant: Plant, sowingPlanID : Int)
+    + logFarmHarvest(machineID: Int, amount: Int, plant: Plant)
+    + logMachineReturn(machineID: Int, tileID: Int)
+    + logMachineUnload(machineID: Int, amount: Int,plant: Plant)
+    + logFarmFinish(farmID: Int)
+    + logIncident(incidentID: Int, incidentType: Incident, tileIDs: List<Int>)
+    + logSimulationInfo()
+    + logHarvestCollect(farmID: Int, amount: Int)
+    + logTotalHarvest(plant: Plant, amount: Int)
+    + logParseSuccess(filename: String)
+    + logSimulationStart(yearTick: YearTick)
+    + logTickStart(tick: Int, yearTick: YearTick)
+    + logSoilMoisture(amountField: Int, amountPlantation: Int)
+    + logCloudMovement(cloudID: Int, amountFluid: Int, startTileID: Int, endTileID: Int)
+    + logCloudStuck(cloudID: Int, tileID: Int)
+    + logCloudDissipation(cloudID: Int, tileID: Int)
+    + logHarvestEstimateChange(tileID: Int, amount: Int, plant: Plant)
+    + logCloudMovement(startTileID: Int, amountSunLight: Int)
+    + logCloudPosition(cloudID: Int, tileID: Int, amountSunLight: Int)
+    + logMissedActions(tileID: Int, actions: List<ActionType>)
+    + logHarvestEstimate(tileID: Int, actions: List<ActionType>)
+    + logMachineReturnFail(machineID: Int)
+}
+
+class InfoLogger {
+    + logParseSuccess(filename: String)
+    + logSimulationStart(yearTick: YearTick)
+    + logTickStart(tick: Int, yearTick: YearTick)
+    + logSoilMoisture(amountField: Int, amountPlantation: Int)
+    + logCloudMovement(cloudID: Int, amountFluid: Int, startTileID: Int, endTileID: Int)
+    + logCloudStuck(cloudID: Int, tileID: Int)
+    + logCloudDissipation(cloudID: Int, tileID: Int)
+    + logHarvestEstimateChange(tileID: Int, amount: Int, plant: Plant)
+}
+class DebugLogger {
+    + logCloudMovement(startTileID: Int, amountSunLight: Int)
+    + logCloudPosition(cloudID: Int, tileID: Int, amountSunLight: Int)
+    + logMissedActions(tileID: Int, actions: List<ActionType>)
+    + logFarmActiveSowingPlans(farmID : Int, sowingPlansIDS : List<Int>)
+}
+}
+
+
+package Parser #green {
+class TileFactory {
+    + createVillageTile(tileID: Int, tileCoordinate: Coordinate): Tile
+    + createFarmstead(tileID: Int, tileCoordinate: Coordinate, tileFarm: Int, tileShed: Boolean, tileAirflow: Direction?): Tile
+    + createField(tileID: Int, tileCoordinate: Coordinate, tileFarm: Int, tileAirflow: Direction?, tileCapacity: Int, tilePlant: String): Field
+    + createMeadow(tileID: Int, tileCoordinate: Coordinate, tileAirflow: Direction?): Tile
+    + createPlantation(tileID: Int, tileCoordinate: Coordinate, tileFarm: Int, tileAirflow: Direction?, tileCapacity: Int, tilePlant: String): Plantation
+    + createRoad(tileID: Int, tileCoordinate: Coordinate, tileAirflow: Direction?): Tile
+    + createEmptyTile(tileCoordinate: Coordinate): Tile
+    + createForestTile(tileID: Int, tileCoordinate: Coordinate, tileAirflow: Direction?): Tile
+}
+
+class MainParser{
+    - tileByID: MutableMap<Int, Tile>
+    - farmsByID: MutableMap<Int, Map>
+    - clouds: List<Cloud>
+    - incidents:List<Incident>
+    + parse(mapFile: String , farmsFile: String, scenarioFile: String, start_year_tick: Int, max_ticks: Int ): Simulation
+    + getTileById(tileID: Int): Tile
+    + hasShed(t: tileId): Boolean
+    + isFarmstead(farmsteadTile: Tile): Boolean
+    + isField(fieldTile: Tile): Boolean
+    + isPlantation(plantationTile: Tile): Boolean
+}
+
+class MapParser {
+    + parseMap(mapFile: String): MutableMap<Int, Tile>?
+    + validateTile(jsonTile: jsonObject): Boolean
+    + createTile(jsonTile: jsonObject): Tile
+
+}
+
+class FarmParser {
+    + parseFarmsAndMachines(farmsFile: String): MutableMap<Int, Farm>
+    - validateFarm(farmId: Int, farmName: String, farmsteads: List<Int>, fields: List<Int>, plantations: List<Int>, machines: List<Machine>): Boolean
+    - validateMachine(machineID: Int, machineName: String, actions: List<String>, plants: List<String>, duration: Int, location: Int): Boolean
+    - createFarm(farmId: Int, farmName: String, farmsteads: List<Int>, fields: List<Int>, plantations: List<Int>, machines: List<Machine>): Farm
+    - createMachine (machineID: Int, machineName: String, actions: List<String>, plants: List<String>, duration: Int, location: Int): Machine
+}
+
+class ScenarioParser  {
+    + parseClouds(scenarioFile: String): List<Cloud>
+    - validateCloud(cloudID: Int, cloudLocation: Int, cloudDuration: Int, cloudAmount: Int): Boolean
+    - createCloud(cloudID: Int, cloudLocation: Int, cloudDuration: Int, cloudAmount: Int): Cloud
+    + parseIncidents(scenarioFile: String): List<Incident>
+    - createIncident(incidentID: Int, incidentType: String, incidentTick: Int, incidentDuration: Int, incidentLocation: Int, incidentRadius: Int, incidentAmount: Int, incidentEffect: Int, incidentMachine: Int ): Incident
+    - validateIncident(jsonIncident: Incident): Boolean
+}
+}
+' ===== Enums =====
+
+package Plant #gray {
+
+' ===== Value objects =====
+class Window {
+  ' Absolute start tick in year (1..24), see Table 1 (§2.2.1)
+  - startTick: YearTick
+  ' Absolute end tick in year (1..24), inclusive
+  - endTick: YearTick
+  - lateRule: LateRule?
+
+  + contains(yearTick: YearTick): Boolean
+}
+
+
+class LateRule {
+  ' Percentage penalty per late tick (e.g., 20 for −20%/tick; §2.2.2)
+  - perTickPenaltyPct: Int
+  ' Number of late ticks that can be penalized before hard stop
+  - ticksAllowed: Int
+}
+
+class FieldWeedingRule {
+  - offsets: List<Int>
+  - everyN: Int?
+}
+
+' ===== Plant specification =====
+abstract class Plant {
+  - progress: MutableMap<ActionType, List<Pair<Int, YearTick>>> = mutableMapOf()
+  ' Plant identity (one of the 8 plants; §2.2.2)
+  - type: PlantType
+  ' Base estimate in grams under optimal conditions (per plant; §2.2.2)
+  - initialHarvestEstimate: Int
+  ' Required soil moisture in L/tick for no penalty (per plant; §2.2.2)
+  - moistureRequired: Int
+  ' Comfortable sunlight hours per tick; >comfort → −10% per +25h (§2.2.2 “Sunlight”)
+  - sunlightComfort: Int
+  ' Pollination mode (NONE/SELF/INSECTS; §2.2.2)
+  - pollination: Pollination
+  - harvestWindow: Window
+  - BloomWindows: List<Window>
+  + isInBloomWindow(sowingTick: Int, yearTick: YearTick): Boolean
+  + isInHarvestWindow(yearTick: YearTick): Boolean
+  + setProgress(action: ActionType, tick: Int)
+}
+
+class PlantFactory {
+  + createPotatoPlant(): FieldPlant
+  + createWheatPlant(): FieldPlant
+  + createOatPlant(): FieldPlant
+  + createPumpkinPlant(): FieldPlant
+  + createApplePlant(): PlantationPlant
+  + createGrapePlant(): PlantationPlant
+  + createAlmondPlant(): PlantationPlant
+  + createCherryPlant(): PlantationPlant
+}
+
+
+
+class FieldPlant {
+  - sowWindow: Window
+  - weedingRule: FieldWeedingRule?
+
+  + isInSowingWindow(yearTick: YearTick): Boolean
+  + isInWeedingWindow(sowingTick: Int, yearTick: YearTick): Boolean
+
+}
+
+class PlantationPlant {
+  - cuttingWindow: Window
+  - mowingWindows: List<Window>
+
+  + isInCuttingWindow(yearTick: YearTick): Boolean
+  + isInMowingWindow(yearTick: YearTick): Boolean
+}
+}
+
+package enum #purple {
+enum TileCategory {
+    FARMSTEAD
+    VILLAGE
+    ROAD
+    MEADOW
+    FIELD
+    PLANTATION
+    EMPTY
+    FOREST
+}
+TileCategory --o Tile.Tile
+
+enum Direction {
+  ANGLE_0(0)
+  ANGLE_45(45)
+  ANGLE_90(90)
+  ANGLE_135(135)
+  ANGLE_180(180)
+  ANGLE_225(225)
+  ANGLE_270(270)
+  ANGLE_315(315)
+}
+Tile.Tile o-- Direction
+Simulation.Coordinate ..> Direction
+
+enum ActionType {
+  SOWING,
+  CUTTING,
+  MOWING,
+  WEEDING,
+  IRRIGATING,
+  HARVESTING
+}
+
+enum YearTick {
+  JAN1 (tick = 1, sunlight = 98)
+  JAN2 (tick = 2, sunlight = 98)
+  FEB1 (tick = 3, sunlight = 112)
+  FEB2 (tick = 4, sunlight = 112)
+  MAR1 (tick = 5, sunlight = 126)
+  MAR2 (tick = 6, sunlight = 126)
+  APR1 (tick = 7, sunlight = 140)
+  APR2 (tick = 8, sunlight = 140)
+  MAI1 (tick = 9, sunlight = 168)
+  MAI2 (tick = 10, sunlight = 168)
+  JUN1 (tick = 11, sunlight = 168)
+  JUN2 (tick = 12, sunlight = 168)
+  JUL1 (tick = 13, sunlight = 168)
+  JUL2 (tick = 14, sunlight = 168)
+  AUG1 (tick = 15, sunlight = 154)
+  AUG2 (tick = 16, sunlight = 154)
+  SEP1 (tick = 17, sunlight = 126)
+  SEP2 (tick = 18, sunlight = 126)
+  OCT1 (tick = 19, sunlight = 112)
+  OCT2 (tick = 20, sunlight = 112)
+  NOV1 (tick = 21, sunlight = 98)
+  NOV2 (tick = 22, sunlight = 98)
+  DEC1 (tick = 23, sunlight = 84)
+  DEC2 (tick = 24, sunlight = 84)
+}
+
+enum PlantType  {
+  POTATO ( Window(APR1, MAI2, null) )
+  WHEAT ( Window(OCT1, OCT2, LateRule(20, 2)) )
+  OAT ( Window(MAR2, MAR2, LateRule(20, 2)) )
+  PUMPKIN ( Window(MAI2, JUN2, null) )
+  APPLE (null)
+  GRAPE (null)
+  ALMOND (null)
+  CHERRY (null)
+}
+
+enum Pollination {
+  ' No insect dependence (or not applicable)
+  NONE
+  ' Self-pollinating plants (e.g., Wheat, Oat, Grape; §2.2.2)
+  SELF
+  ' Requires insects during bloom (e.g., Potato, Pumpkin, Apple, Cherry, Almond; §2.2.2)
+  INSECTS
+}
+Plant.Plant o-- Pollination
+}
+
+
+'============ Associations of all classes ============
+
+'Tile
+Tile.FarmableTile --|> Tile.Tile
+Tile.Plantation -|> Tile.FarmableTile
+Tile.Field -|> Tile.FarmableTile
+
+Tile.Tile o--  enum.TileCategory
+Tile.Tile o-- enum.Direction
+
+Tile.Field o-- enum.PlantType
+Tile.Field o-- Plant.FieldPlant
+
+Tile.Plantation o-- Plant.PlantationPlant
+
+'Cloud
+Cloud.CloudHandler o-- Cloud.Cloud
+Cloud.CloudHandler o-- Simulation.TileManager
+
+'Farm
+Farm.Machine o-- Simulation.TileManager
+Farm.Machine o-- enum.ActionType
+
+Farm.Farm o-- Farm.SowingPlan
+Farm.Farm o-- Farm.Machine
+Farm.Farm o-- Tile.Field
+Farm.Farm o-- Tile.Plantation
+Farm.Farm o-- Tile.Tile
+Farm.Farm o-- enum.PlantType
+
+Farm.SowingPlan o-- enum.PlantType
+Farm.SowingPlan o-- Tile.Field
+
+Farm.Machine o-- enum.PlantType
+Farm.Machine ..> Plant.PlantFactory
+
+
+'Incidents
+Incidents.Incident <|-- Incidents.CloudCreationIncident
+Incidents.Incident <|-- Incidents.BeeHappyIncident
+Incidents.Incident <|-- Incidents.DroughtIncident
+Incidents.Incident <|-- Incidents.BrokenMachineIncident
+Incidents.Incident <|-- CityExpansionIncident
+Incidents.Incident <|-- AnimalAttackIncident
+
+Incidents.BeeHappyIncident o-- Simulation.TileManager
+Incidents.DroughtIncident o-- Simulation.TileManager
+Incidents.CityExpansionIncident o-- Simulation.TileManager
+Incidents.AnimalAttackIncident o-- Simulation.TileManager
+
+Incidents.CloudCreationIncident o-- Cloud.CloudHandler
+Incidents.BrokenMachineIncident o-- Farm.Farm
+Incidents.CityExpansionIncident o-- Farm.Farm
+
+'Simulation
+Simulation.Coordinate ..> enum.Direction
+Simulation.Main ..> Parser.MainParser
+Simulation.Main ..> Simulation.Simulation
+
+Simulation.Simulation o-- enum.YearTick
+Simulation.Simulation o-- Incidents.Incident
+Simulation.Simulation o-- Farm.Farm
+Simulation.Simulation o-- Cloud.CloudHandler
+Simulation.Simulation o-- Simulation.TileManager
+Simulation.TileManager o-- Tile.Tile
+Simulation.TileManager o-- Simulation.Coordinate
+
+'Plant
+Plant.FieldPlant --|> Plant.Plant
+Plant.PlantationPlant -|> Plant.Plant
+
+Plant.Plant o-- Plant.Window
+Plant.Window o-- Plant.LateRule
+Plant.FieldPlant o- Plant.FieldWeedingRule
+
+Plant.PlantFactory ..> Plant.FieldPlant
+Plant.PlantFactory ..> Plant.PlantationPlant
+
+Plant.Plant o-- enum.ActionType
+Plant.Plant o-- enum.PlantType
+Plant.Window o-- enum.YearTick
+Plant.Plant o-- enum.Pollination
+
+'Logger
+Logger.LoggerFacade o-- Logger.ImportantLogger
+
+Logger.InfoLogger -|> Logger.ImportantLogger
+Logger.DebugLogger -|> Logger.InfoLogger
+
+'Parser
+Parser.MapParser ..> Parser.TileFactory
+Parser.TileFactory ..> Tile.Tile
+
+Parser.MapParser <.. Parser.MainParser
+Parser.FarmParser <.. Parser.MainParser
+Parser.ScenarioParser <.. Parser.MainParser
+
+@enduml

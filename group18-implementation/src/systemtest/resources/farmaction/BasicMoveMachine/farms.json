@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "VillageReturnFarm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [24],
+      "machines": [
+        {
+          "id": 0,
+          "name": "AppleHarvester",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

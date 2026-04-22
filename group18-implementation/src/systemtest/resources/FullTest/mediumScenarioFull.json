@@ -1,0 +1,100 @@
+{
+  "clouds": [
+    {
+      "id": 1,
+      "location": 7,
+      "duration": 10,
+      "amount": 10000
+    },
+    {
+      "id": 2,
+      "location": 10,
+      "duration": -1,
+      "amount": 10000
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "type": "ANIMAL_ATTACK",
+      "tick": 0,
+      "location": 13,
+      "radius": 3
+    },
+    {
+      "id": 2,
+      "type": "BEE_HAPPY",
+      "tick": 13,
+      "location": 2,
+      "radius": 3,
+      "effect": 100
+    },
+    {
+      "id": 3,
+      "type": "CLOUD_CREATION",
+      "tick": 20,
+      "location": 22,
+      "radius": 2,
+      "duration": 10,
+      "amount" : 10000
+    },
+    {
+      "id": 4,
+      "type": "CITY_EXPANSION",
+      "tick": 6,
+      "location": 8
+    },
+    {
+      "id": 5,
+      "type": "BROKEN_MACHINE",
+      "tick": 0,
+      "duration" : 5,
+      "machineId": 1
+    },
+    {
+      "id": 6,
+      "type": "DROUGHT",
+      "tick": 20,
+      "location" : 5,
+      "radius" : 1
+    },
+    {
+      "id": 7,
+      "type": "BEE_HAPPY",
+      "tick": 13,
+      "location": 22,
+      "radius": 2,
+      "effect": 100
+    },
+    {
+      "id": 8,
+      "type": "BEE_HAPPY",
+      "tick": 9,
+      "location": 15,
+      "radius": 2,
+      "effect": 100
+    },
+    {
+      "id": 9,
+      "type": "CITY_EXPANSION",
+      "tick": 6,
+      "location": 7
+    },
+    {
+      "id": 10,
+      "type": "DROUGHT",
+      "tick": 10,
+      "location" : 15,
+      "radius" : 2
+    },
+    {
+      "id": 11,
+      "type": "CLOUD_CREATION",
+      "tick": 10,
+      "location": 30,
+      "radius": 1,
+      "duration": 15,
+      "amount" : 10000
+    }
+  ]
+}

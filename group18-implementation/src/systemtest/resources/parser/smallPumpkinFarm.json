@@ -1,0 +1,29 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "TOP FARM",
+      "farmsteads": [2],
+      "fields": [1],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 1,
+          "name": "Field Machine Top",
+          "actions": ["SOWING", "CUTTING", "MOWING", "WEEDING", "IRRIGATING", "HARVESTING"],
+          "plants": ["OAT", "PUMPKIN", "WHEAT", "POTATO"],
+          "duration": 1,
+          "location": 2
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 3,
+          "tick": 1,
+          "plant": "PUMPKIN",
+          "fields": [1]
+        }
+      ]
+    }
+      ]
+    }

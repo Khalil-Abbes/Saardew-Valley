@@ -1,0 +1,56 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Schedule Farm",
+      "farmsteads": [0],
+      "fields": [2],
+      "plantations": [4, 6],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Seeder",
+          "actions": ["SOWING"],
+          "plants": ["OAT"],
+          "duration": 2,
+          "location": 0
+        },
+        {
+          "id": 1,
+          "name": "Weeder",
+          "actions": ["WEEDING"],
+          "plants": ["OAT"],
+          "duration": 2,
+          "location": 0
+        },
+        {
+          "id": 2,
+          "name": "Harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["OAT", "APPLE"],
+          "duration": 3,
+          "location": 0
+        },
+        {
+          "id": 3,
+          "name": "Mower",
+          "actions": ["MOWING"],
+          "plants": ["APPLE"],
+          "duration": 2,
+          "location": 0
+        },
+        {
+          "id": 4,
+          "name": "Cutter",
+          "actions": ["CUTTING"],
+          "plants": ["APPLE"],
+          "duration": 4,
+          "location": 0
+        }
+      ],
+      "sowingPlans": [
+        { "id": 200, "tick": 3, "plant": "OAT", "fields": [2] }
+      ]
+    }
+  ]
+}

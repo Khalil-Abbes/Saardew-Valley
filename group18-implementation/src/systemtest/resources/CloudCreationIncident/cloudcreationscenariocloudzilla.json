@@ -1,0 +1,53 @@
+{
+  "clouds": [
+    {
+      "id": 1,
+      "location": 8,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 2,
+      "location": 9,
+      "duration": -1,
+      "amount": 1
+    },
+    {
+      "id": 3,
+      "location": 10,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 4,
+      "location": 11,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 5,
+      "location": 12,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 6,
+      "location": 13,
+      "duration": -1,
+      "amount": 1
+    },{
+      "id": 7,
+      "location": 14,
+      "duration": -1,
+      "amount": 1
+    }
+  ],
+  "incidents": [
+    {
+      "id": 8,
+      "type": "CLOUD_CREATION",
+      "tick": 0,
+      "location": 4,
+      "radius": 100,
+      "duration": -1,
+      "amount": 1
+    }
+  ]
+}

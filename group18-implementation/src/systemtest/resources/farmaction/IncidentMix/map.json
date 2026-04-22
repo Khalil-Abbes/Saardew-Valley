@@ -1,0 +1,61 @@
+{
+  "tiles": [
+    {
+      "id": 0,
+      "coordinates": { "x": 1, "y": 1 },
+      "category": "FARMSTEAD",
+      "farm": 0,
+      "shed": true,
+      "airflow": false
+    },
+    {
+      "id": 2,
+      "coordinates": { "x": 2, "y": 2 },
+      "category": "PLANTATION",
+      "farm": 0,
+      "capacity": 1200,
+      "plant": "APPLE",
+      "airflow": true,
+      "direction": "90"
+    },
+    {
+      "id": 6,
+      "coordinates": { "x": 4, "y": 2 },
+      "category": "PLANTATION",
+      "farm": 0,
+      "capacity": 1200,
+      "plant": "GRAPE",
+      "airflow": false
+    },
+    {
+      "id": 10,
+      "coordinates": { "x": 6, "y": 2 },
+      "category": "PLANTATION",
+      "farm": 0,
+      "capacity": 1200,
+      "plant": "ALMOND",
+      "airflow": false
+    },
+    {
+      "id": 20,
+      "coordinates": { "x": 4, "y": 4 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 10000,
+      "possiblePlants": ["OAT"],
+      "airflow": false
+    },
+    {
+      "id": 4,
+      "coordinates": { "x": 3, "y": 3 },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 8,
+      "coordinates": { "x": 5, "y": 3 },
+      "category": "FOREST",
+      "airflow": false
+    }
+  ]
+}

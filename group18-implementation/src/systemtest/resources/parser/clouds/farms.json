@@ -1,0 +1,33 @@
+{
+  "farms": [
+    {
+      "farmsteads": [
+        6
+      ],
+      "fields": [],
+      "id": 1,
+      "machines": [
+        {
+          "actions": [
+            "IRRIGATING"
+          ],
+          "duration": 2,
+          "id": 4,
+          "location": 6,
+          "name": "Tractor",
+          "plants": [
+            "CHERRY",
+            "APPLE"
+          ]
+        }
+      ],
+      "name": "Invalid cloud farm",
+      "plantations": [
+        2,
+        3
+      ],
+      "sowingPlans": [
+      ]
+    }
+  ]
+}

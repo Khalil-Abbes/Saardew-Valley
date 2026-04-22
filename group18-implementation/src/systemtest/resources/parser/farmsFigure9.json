@@ -1,0 +1,46 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Very Cool Farm",
+      "farmsteads": [12],
+      "fields": [40,42,43,44,46,48,50,52,54],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 1,
+          "name": "Tractor",
+          "actions": ["SOWING", "IRRIGATING"],
+          "plants": ["WHEAT", "PUMPKIN"],
+          "duration": 4,
+          "location": 12
+        },
+        {
+          "id": 2,
+          "name": "mach",
+          "actions": ["HARVESTING"],
+          "plants": ["OAT", "PUMPKIN"],
+          "duration": 10,
+          "location": 12
+        },
+        {
+          "id": 3,
+          "name": "chama",
+          "actions": ["WEEDING", "IRRIGATING"],
+          "plants": ["PUMPKIN"],
+          "duration": 4,
+          "location": 12
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 3,
+          "tick": 0,
+          "plant": "WHEAT",
+          "fields": [40, 43, 44, 48, 52]
+        }
+
+      ]
+    }
+  ]
+}

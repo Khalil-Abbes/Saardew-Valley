@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "CloudBasic Farm",
+      "farmsteads": [0],
+      "fields": [2],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Seeder",
+          "actions": ["SOWING"],
+          "plants": ["WHEAT"],
+          "duration": 4,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

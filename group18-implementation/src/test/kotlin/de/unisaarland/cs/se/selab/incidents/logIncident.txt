@@ -1,0 +1,1 @@
+[IMPORTANT] Incident: Incident 2 of type CITY_EXPANSION happened and affected tiles 2.

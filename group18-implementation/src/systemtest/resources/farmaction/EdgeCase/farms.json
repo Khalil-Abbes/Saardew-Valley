@@ -1,0 +1,37 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "North Farm",
+      "farmsteads": [1],
+      "fields": [20, 24],
+      "plantations": [22, 26],
+      "machines": [
+        { "id": 0, "name": "Seeder-0",   "actions": ["SOWING"],     "plants": ["PUMPKIN", "WHEAT"],                    "duration": 4,  "location": 1 },
+        { "id": 1, "name": "Harvester-0","actions": ["HARVESTING"], "plants": ["WHEAT", "PUMPKIN", "OAT"],              "duration": 10, "location": 1 },
+        { "id": 2, "name": "Weeder-0",   "actions": ["WEEDING"],    "plants": ["PUMPKIN", "WHEAT", "OAT"],             "duration": 2,  "location": 1 },
+        { "id": 3, "name": "Irrigator-0","actions": ["IRRIGATING"], "plants": ["PUMPKIN", "WHEAT", "APPLE", "GRAPE", "CHERRY"], "duration": 2, "location": 1 }
+      ],
+      "sowingPlans": [
+        { "id": 200, "tick": 10, "plant": "PUMPKIN", "fields": [20] }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "South Farm",
+      "farmsteads": [17],
+      "fields": [28],
+      "plantations": [30],
+      "machines": [
+        { "id": 7,  "name": "Cutter-1",    "actions": ["CUTTING"],    "plants": ["CHERRY"],         "duration": 3, "location": 17 },
+        { "id": 8,  "name": "Mower-1",     "actions": ["MOWING"],     "plants": ["CHERRY"],         "duration": 2, "location": 17 },
+        { "id": 9,  "name": "Irrigator-1", "actions": ["IRRIGATING"], "plants": ["CHERRY","OAT","WHEAT","PUMPKIN","APPLE","GRAPE"], "duration": 2, "location": 17 },
+        { "id": 10, "name": "Harvester-1", "actions": ["HARVESTING"], "plants": ["OAT"],            "duration": 8, "location": 17 },
+        { "id": 11, "name": "Seeder-1",    "actions": ["SOWING"],     "plants": ["OAT"],            "duration": 3, "location": 17 }
+      ],
+      "sowingPlans": [
+        { "id": 201, "tick": 6, "plant": "OAT", "fields": [28] }
+      ]
+    }
+  ]
+}

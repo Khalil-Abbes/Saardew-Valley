@@ -1,0 +1,23 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Very Cool Farm",
+      "farmsteads": [30],
+      "fields": [10, 11, 12, 13],
+      "plantations": [17, 18, 150],
+      "machines": [
+        {
+          "id": 4,
+          "name": "Tractor",
+          "actions": ["IRRIGATING"],
+          "plants": ["CHERRY", "ALMOND"],
+          "duration": 4,
+          "location": 30
+        }
+      ],
+      "sowingPlans": [
+      ]
+    }
+  ]
+}

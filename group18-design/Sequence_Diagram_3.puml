@@ -1,0 +1,553 @@
+@startuml simulation_sequence
+autoactivate on
+participant Main as m
+participant Simulation as s
+participant "ch: CloudHandler" as ch
+participant "c: Cloud" as c
+participant "t: Tile" as t
+participant "co: Coordinate" as co
+participant "field:Field" as f
+participant "plantation:Plantation" as pl
+participant "logger: Logger" as l
+participant "tileManager: TileManager" as tm
+participant "f34: Farm" as farm
+participant "m4: Machine" as m4
+participant "w: FieldPlant" as w
+participant "p: PlantationPlant" as p
+
+s -> s: runTick(44, APR2)
+
+group reduceSoilMoisturePhase
+s -> s: reduceSoilMoisture()
+s -> tm: getFields()
+tm --> s: [t10, t11, t12, t13]
+loop for each field in [t10, t11, t12, t13]
+    s -> f: getPlant()
+    f --> s: p
+    s -> s: isNull(p)
+    s --> s: True
+    s -> f: reduceSoilMoisture(70)
+    f --> s:
+    s -> f: moistureBelowThreshold()
+    f --> s: False
+end
+s -> tm: getPlantations()
+tm --> s: [t17, t18, t150]
+loop for each plantation in [t17, t18, t150]
+    s -> pl: getPlant()
+    pl --> s: p
+    s -> s: isNull(p)
+    s --> s: False
+    s -> pl: reduceSoilMoisture(100)
+    pl --> s:
+    s -> pl: moistureBelowThreshold()
+    pl -> p: p.getMoistureRequred()
+    p --> pl: 150
+    pl ->pl: this.currentMoisture < 150
+    pl --> pl: True
+    pl --> s: True
+end
+s -> l: logSoilMoisture(0, 3)
+l --> s:
+s --> s:
+
+end
+
+
+group CloudPhase
+s -> s: handleClouds()
+    s -> ch: run(idToTile)
+    group CloudMovements
+        ch -> ch: getClouds()
+        ch --> ch: clouds := [c3, c5, c9]
+        group Cloud3
+            group Just moving [Do same operations during path\n t23(9,5) ->(315 deg) t22(8,4)\n ->(270 deg) t21(6,4)\n ->(270 deg) t20(4,4)\navailableMovesLeft := 7]
+                ch -> c: cloud3.getAmount()
+                c --> ch: 4000
+                ch -> ch: 4000 > 5000
+                ch --> ch: False
+                ch -> ch: moveCloud(cloud3)
+                ch -> c: cloud.getAvailableMovesLeft()
+                c --> ch: 10
+                ch -> ch: 10 > 0
+                ch --> ch: True
+                ch -> c: cloud3.getLocation()
+                c --> ch: 23
+                ch -> tm: getTileById(23)
+                tm --> ch: t23
+                ch -> tm: getNeighborInDirection(t23)
+                tm -> t: t23.getDirection()
+                t --> tm: ANGLE_315
+
+                tm -> t: t23.getCoordinates()
+                t --> tm: coords := Coordinate(9, 5)
+                tm -> co: destCoords := coords.getNeighborCoordinateInDirection(ANGLE_315)
+                co -> co: Coordinate(9 + 2*sin(315), 5 + 2*cos(315))
+                co --> co: Coordinate(8, 4)
+                co --> tm: destCoords := Coordinate(8, 4)
+                tm -> tm: getTileByCoords(destCoords)
+                tm --> tm: t22
+                tm --> ch: t22
+
+                ch -> c: t22.getId()
+                c --> ch: 22
+                ch -> c: cloud3.setLocation(22)
+                c --> ch
+                ch -> c: cloud3.setAvailableMoves(10 - 1)
+                c --> ch
+                ch -> ch: t23 instanceof FarmableTile
+                ch --> ch: False
+                note right
+                no sunlight
+                end note
+                ch -> c: cloud3.getId()
+                c --> ch: 3
+                ch -> c: cloud3.getAmount()
+                c --> ch: 4000
+                ch -> l: logCloudMovement(cloudID = 3, amountFluid = 4000, startTileID = 23, endTileID = 22)
+                l --> ch: cloud move message
+                ch -> ch: isOnVillage(cloud3)
+                ch --> ch: False
+                ch -> ch: checkCollision(cloud3)
+                ch --> ch: null
+                ch --> ch
+            end
+
+            ch -> c: cloud3.getAmount()
+            c --> ch: 4000
+            ch -> ch: 4000 > 5000
+            ch --> ch: False
+            ch -> ch: moveCloud(cloud3)
+            ch -> c: cloud.getAvailableMovesLeft()
+            c --> ch: 9
+            ch -> ch: 9 > 0
+            ch --> ch: True
+            ch -> tm: tiles.getTileById(cloud3.getLocation())
+            note right
+                Get the tile under the cloud
+            end note
+            tm --> ch: t20
+            ch -> tm: getNeighborInDirection(t20)
+            note right
+                Get the tile at which t20's direction
+                is pointing at
+            end note
+            tm --> ch: t18
+            ch -> c: t18.getId()
+            c --> ch: 18
+            ch -> c: cloud3.setLocation(18)
+            c --> ch
+            ch -> c: cloud3.setAvailableMovesLeft(7 - 1)
+            c --> ch
+            ch -> ch: t20 instanceof FarmableTile
+            ch --> ch: False
+            ch -> c: cloud3.getId()
+            c --> ch: 3
+            ch -> c: cloud3.getAmount()
+            c --> ch: 4000
+            ch -> l: logCloudMovement(cloudID = 3, amountFluid = 4000, startTileID = 20, endTileID = 18)
+            l --> ch: cloud move message
+            ch -> ch: isOnVillage(t18)
+            ch --> ch: False
+            ch -> ch: checkCollision(cloud3)
+            ch --> ch: cloud5
+            ch -> ch: merge(cloud3, cloud5)
+            ch -> ch: getHighestCloudId()
+            ch --> ch: 9
+            ch -> c: cloud3.getAmount()
+            c --> ch: 4000
+            ch -> c: cloud5.getAmount()
+            c --> ch: 2000
+            ch -> c: cloud3.getDuration()
+            c --> ch: dur3
+            ch -> c: cloud5.getDuration()
+            c --> ch: dur5
+            ch -> c: cloud5.getLocation()
+            c --> ch: 18
+            ch -> c: cloud3.getAvailableMoves()
+            c --> ch: 6
+            ch -> c: cloud5.getAvailableMoves()
+            c --> ch: 10
+            ch -> c: Cloud(Id = 10, location = 18, amount = 6000, duration = min(dur3, dur5), availableMovesLeft = max(6, 10))
+            c --> ch: cloud10
+            ch -> ch: clouds.remove(cloud3)
+            ch --> ch: clouds := listOf(c5, c9)
+            ch -> ch: clouds.remove(cloud5)
+            ch --> ch: clouds := listOf(c9)
+            ch -> ch: clouds.add(cloud10)
+            ch --> ch: clouds := listOf(c9, c10)
+            ch -> l: logCloudUnion(cloudIDFromTile = 5, cloudIDMovingToTile = 3, cloudIDNew = 10, amount: 6000, duration = min(dur3, dur5), tileID = 18)
+            l --> ch: cloud merge message
+            ch --> ch
+            ch --> ch
+        end
+        group Cloud9
+            ch -> c: cloud9.getAmount()
+            c --> ch: 4500
+            ch -> ch: 4500 > 5000
+            ch --> ch: False
+            group Move 4 tiles [Cloud moves through the path\n t12(8,0) ->(270 deg) t10(6,0)\n ->(225 deg.) t9(5,1)\n ->(315 deg.) t8(4,0)\n ->(270 deg.) t6(2,0)]
+                ch -> ch: moveCloud(cloud9)
+                note right
+                    Same instructions and checks for reaching
+                    the neighbour tile and logging it.
+                    t12 and t10's sunlight got decreased to 137 in both.
+                    Cloud9's location := 6; availableMovesLeft := 6
+                end note
+                ch --> ch
+            end
+            ch -> c: cloud9.getAmount()
+            c --> ch: 4500
+            ch -> ch: 4500 > 5000
+            ch --> ch: False
+            ch -> ch: moveCloud(cloud9)
+            ch -> tm: tiles.getTileById(cloud9.getLocation())
+            note right
+                Get the tile by its id
+            end note
+            tm --> ch: t6
+            ch -> tm: getNeighborInDirection(t6)
+            tm -> t: t6.getDirection()
+            t --> tm: Null
+            tm --> ch: Null
+
+            ch -> c: cloud9.getId()
+            c --> ch: 9
+            ch -> c: cloud9.getLocation()
+            c --> ch: 6
+            ch -> l: logCloudStuck(cloudID = 9, tileID = 6)
+            l --> ch: cloud stuck message
+            ch --> ch
+            ch -> c: cloud9.getDuration()
+            c --> ch: dur9
+            ch -> c: cloud9.setDuration(dur9 - 1)
+            c --> ch
+        end
+        group Cloud10
+            ch -> c: cloud10.getAmount()
+            c --> ch: 6000
+            ch -> ch: 6000 > 5000
+            ch --> ch: True
+            ch -> ch: rain(cloud10)
+            ch -> tm: tiles.getTileById(cloud10.getLocation())
+            note right
+                Get the tile under the cloud
+            end note
+            tm --> ch: t18
+            ch -> ch: t18 instanceof FarmableTile
+            ch --> ch: True
+            ch -> t: t18.getMoistureCapacity()
+            t --> ch: 1000
+            ch -> t: t18.getCurrentMoisture()
+            t --> ch: 200
+            ch -> c: cloud10.getAmount()
+            c --> ch: 6000
+            ch -> ch: 6000 > 800
+            ch --> ch: True
+            ch -> ch: rainToFillTile(cloud10, 800)
+            ch -> tm: tiles.getTileById(cloud10.getLocation())
+            note right
+                Get the tile under the cloud
+            end note
+            tm --> ch: t18
+            ch -> t: t18.getMoistureCapacity()
+            t --> ch: 1000
+            ch -> t: t18.setCurrentMoisture(1000)
+            t --> ch
+            ch -> c: cloud10.getAmount()
+            c --> ch: 6000
+            ch -> c: cloud10.setAmount(6000 - 800)
+            c --> ch
+            ch -> c: cloud10.getId()
+            c --> ch: 10
+            ch -> l: logCloudRain(cloudID = 10, tileID = 18, amount = 800)
+            l --> ch: cloud rain message
+            ch --> ch
+            ch --> ch
+            group Move 1 tile [from t18(2,4) ->(270 deg.) t17(0,4)]
+                ch -> ch: moveCloud(cloud10)
+                note right
+                --Note to describe skipped instructions:
+                Same instructions and checks for reaching
+                the neighbour tile and logging it.
+                t18's sunlight got decreased to 137
+                Cloud10's location := 17; availableMovesLeft := 9
+                end note
+                ch --> ch
+            end
+            ch -> c: cloud10.getAmount()
+            c --> ch: 5200
+            ch -> ch: 5200 > 5000
+            ch --> ch: True
+            group Raining to fill the tile [cloud_id: 10; t17:\ncurrent moisture: 200\ncapacity moisture: 1000\ndifference: 800]
+                ch -> ch: rain(cloud10)
+                note right
+                Same instructions and checks +
+                logging as the last rain(cloud)
+                with rainToFillCloud(cloud) call.
+                Cloud remains with amount := 4400
+                end note
+                ch --> ch
+            end
+
+            group Move 1 tile [from t17(0,4) ->(270 deg.) t150(-2,4)\ncloud id: 10, amount: 4400]
+                ch -> ch: moveCloud(cloud10)
+                note right
+                --Note to describe skipped instructions:
+                Same instructions and checks for reaching
+                the neighbour tile and logging it
+                (like the last last moveCloud(cloud) call)
+                t17's sunlight got decreased to 137
+                Cloud10's location := 150; availableMovesLeft := 8
+                end note
+                ch --> ch
+            end
+
+            ch -> c: cloud10.getAmount()
+            c --> ch: 4400
+            ch -> ch: 4400 > 5000
+            ch --> ch: False
+            ch -> ch: moveCloud(cloud10)
+            note right
+                Same instructions and checks for reaching
+                the neighbour tile (t16) and decreasing 
+                t150's sunlight to 137 and logging it
+                (like the last moveCloud(cloud) call).
+                Cloud's location := 16; availableMovesLeft := 7
+            end note
+            ch -> ch: isOnVillage(cloud10)
+            ch --> ch: True
+            ch -> l: logCloudStuck(cloudID = 10, tileID = 16)
+            l --> ch: cloud got stuck message
+            ch -> l: logCloudRain(cloudID = 10, tileID = 16, amount = 4400)
+            l --> ch: cloud rain over village
+
+            ch -> ch: removeCloud(cloud10) 
+            ch -> c: cloud10.getId()
+            c --> ch: 10
+            ch -> c: cloud10.getLocation()
+            c --> ch: 16
+            ch -> l: logCloudDissipation(cloudID = 10, tileID = 16)
+            l --> ch: cloud dissipation message
+            ch -> ch: clouds.remove(cloud10)
+            ch --> ch: clouds := listOf(c9)                  
+            ch --> ch
+        end
+    end
+    ch --> ch
+    ch -> ch: decreaseCloudyTilesSunlight()
+    ch -> ch: getClouds()
+    ch --> ch: listOf(c9)
+    loop for each cloud in listOf(c9)
+        ch -> ch: tiles.getTileById(cloud.getLocation())
+        note right
+            Get the tile under the cloud
+        end note
+        ch --> ch: t6
+        ch -> ch: t6 instanceof FarmableTile
+        ch --> ch: False
+    end
+ch --> ch
+ch --> s
+end
+
+
+group FarmActionPhase
+
+s -> s: farmAction(44, APR2)
+s -> sm: getFarms()
+sm --> s: [f2]
+s -> farm: run(44, APR2)
+farm -> l: logFarmStart(2)
+l --> farm:
+farm -> farm: sowField(44, APR2)
+farm -> farm: getFulfillableSowingPlans(44)
+farm -> farm: getSowingPlans()
+farm --> farm: []
+farm --> farm: []
+
+farm -> farm: harvestPlantations(44, APR2)
+farm -> farm: getPlantationsWithHarvestablePlants()
+farm --> farm: []
+farm --> farm:
+farm -> farm: harvestFields()
+farm -> farm: getFieldsWithHarvestablePlants()
+farm --> farm: []
+farm --> farm:
+farm -> farm: cutPlantations()
+farm -> farm: getPlantationsWithCuttablePlants()
+farm --> farm: []
+farm --> farm:
+farm -> farm: doRemaining()
+farm -> farm: getAvailableMachines()
+farm --> farm: [m4]
+farm -> m3: getActions()
+m3 --> farm: [HARVESTING]
+farm --> farm:
+farm --> farm:
+farm -> l: logFarmFinish(this.id)
+l --> farm:
+
+farm --> s:
+ s--> s:
+
+end
+
+participant "aa: AnimalAttackIncident" as aa
+participant "bh: BeeHappyIncident" as bh
+participant "t19: Tile" as t19
+participant "t20: Tile(FOREST)" as t20
+participant "t21: Tile(FOREST)" as t21
+participant "t11: Field" as t11
+participant "t18: Plantation(CHERRY)" as t18
+participant "t120: Tile" as t120
+participant "t3: Tile(MEADOW)" as t3
+participant "t150: Plantation(CHERRY)" as t150
+
+
+group IncidentHappenPhase
+s -> s: incidentStart()
+s -> tm: getIncidentsAtTick(44)
+tm --> s: [aa(id=2, loc=19, r=2), bh(id=?, loc=120, r=1)]
+
+' Animal Attack
+s -> aa: perform()
+
+' 1) Area-of-effect (AoE) around 19, from FOREST
+aa -> tm: getTileById(19)
+tm --> aa: t19
+aa -> tm: getAllNeighborTilesInRadius(t19, radius=2)
+tm --> aa: aaArea
+aa -> tm: filterTilesByCategory(aaArea, FOREST)
+tm --> aa: forestTiles=[t20(id=20), t21(id=21)]
+
+' 2) For each FOREST, collect adjoining farmables (radius=1), then de-dup and sort by id
+loop forest in forestTiles
+  aa -> tm: getAllNeighborTilesInRadius(forest, radius=1)
+  tm --> aa: neighborTiles1
+  aa -> tm: neighborTiles1.filter { it is Field || it is Plantation }
+  tm --> aa: farmablesFromThisForest
+  aa -> aa: attacked += farmablesFromThisForest
+end
+aa -> aa: attacked := uniqueSortedById(attacked) = [t11(Field), t18(Plantation)]
+
+' 3) Apply effects once per tile 
+' -50% for later
+aa -> t11: attackEffectsForCalcHarvest.add(-50)
+t11 --> aa
+
+' PLANTATION id=18 (CHERRY) -> reset mowing this & next tick, fruits −10% for later
+aa -> t18: mowingDoneTicks += {44, 45}
+t18 --> aa
+
+aa -> t18: attackEffectsForCalcHarvest.add(-10)
+t18 --> aa
+
+
+' 4) Log impacted tiles (ascending ids)
+aa -> l: logIncident(2, ANIMAL_ATTACK, [11])
+l --> aa
+aa -> l: logIncident(2, ANIMAL_ATTACK, [18])
+l --> aa
+aa --> s
+
+' Bee Happy
+s -> bh: perform()
+
+' 1) AoE around 120, from MEADOW
+bh -> tm: getTileById(120)
+tm --> bh: t120
+bh -> tm: getAllNeighborTilesInRadius(t120, radius=1)
+tm --> bh: bhArea
+bh -> tm: filterTilesByCategory(bhArea, MEADOW)
+tm --> bh: meadows=[t3]
+
+' 2) From meadows, collect farmables within distance 2, de-dup & sort
+loop meadow in meadows
+  bh -> tm: getAllNeighborTilesInRadius(meadow, radius=2)
+  tm --> bh: neighborTiles2
+  bh -> tm: neighborTiles2.filter { it is Field || it is Plantation }
+  tm --> bh: nearFarmablesFromMeadows
+  bh -> bh: toBeBloomed += nearFarmablesFromMeadows
+end
+bh -> bh: toBeBloomed := uniqueSortedById(toBeBloomed) = [t150(Plantation)]
+
+' 3) Apply effect only if insect-pollinated & blooming now (APR2)
+bh -> t150: requiresInsectsAndInBloom(yearTick=APR2)
+t150 --> bh: true
+
+bh -> t150: beeEffectsForCalcHarvest.add(effectPercent)
+t150 --> bh
+
+' 4) Log impacted tile(s)
+bh -> l: logIncident(bh.id, BEE_HAPPY, [150])
+l --> bh
+bh --> s
+
+s --> s:
+
+End
+
+group ComputeHarvestPhase
+
+s -> s: computeHarvest()
+s -> tm: getFieldsAndPlantations()
+tm --> s: [t10 ,t11 ,t12 ,t13 ,t17 ,t18 ,t150]
+
+
+loop for each tile in [t10 ,t11 ,t12 ,t13 ,t17 ,t18 ,t150] (by ascending id)
+
+group if tile is FIELD:
+s -> t10 : updateHarvestEstimate(44, 8)
+t10 -> t10 : isSowed(44)
+t10 --> t10 : false
+t10 -> t10 : getMissedAction()
+t10 --> t10 : missedActionList = []
+t10 -> t10 : missedActionList.isEmpty()
+t10 --> t10 : true
+t10 -> t10: applyEnvironmentalPenalty()
+t10 --> t10:
+t10 -> t10: applyActionPenalty()
+t10 --> t10:
+t10 -> t10 : applyIncidentEffect()
+t10 --> t10 :
+t10 -> l : logHarvestEstimateChange(this.id, this.plant.currentEstimate, this.plant)
+l --> t10 :
+t10 --> s :
+end
+
+group if tile is PLANTATION:
+s -> t17 : updateHarvestEstimate(44, 8)
+t17 -> t17 : setInitialHarvestOnPlantationIfNovember(8)
+t17 --> t17 :
+t17 -> t17 : getMissedAction()
+t17 --> t17 : missedActionList = []
+t17 -> t17 : missedActionList.isEmpty()
+t17 --> t17 : true
+t17 -> t17: applyEnvironmentalPenalty()
+t17 --> t17:
+t17 -> t17: applyActionPenalty()
+t17 --> t17:
+t17 -> t17 : applyIncidentEffect()
+t17 --> t17 :
+t17 -> l : logHarvestEstimateChange(this.id, this.plant.currentEstimate, this.plant)
+l --> t17 :
+t17 --> s :
+end
+end
+
+s -->s:
+
+ 
+
+end
+
+s --> s:
+
+
+
+
+
+
+
+@enduml

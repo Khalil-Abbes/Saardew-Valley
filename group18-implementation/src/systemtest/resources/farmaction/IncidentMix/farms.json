@@ -1,0 +1,32 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Integration Farm",
+      "farmsteads": [0],
+      "fields": [20],
+      "plantations": [2, 6, 10],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Seeder OAT",
+          "actions": ["SOWING"],
+          "plants": ["OAT"],
+          "duration": 2,
+          "location": 0
+        },
+        {
+          "id": 1,
+          "name": "Plantation Mower",
+          "actions": ["MOWING"],
+          "plants": ["APPLE", "GRAPE", "ALMOND"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": [
+        { "id": 5, "tick": 0, "plant": "OAT", "fields": [20] }
+      ]
+    }
+  ]
+}

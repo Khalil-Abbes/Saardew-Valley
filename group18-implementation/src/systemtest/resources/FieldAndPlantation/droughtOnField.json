@@ -1,0 +1,13 @@
+{
+  "clouds": [
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "type": "DROUGHT",
+      "tick": 0,
+      "location": 9,
+      "radius": 0
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+@startuml parse
+
+participant Main as m
+participant "p: MainParser" as p
+participant "mp: mapParser" as mp
+participant "f:farmParser" as fp
+participant "sp: scenarioParser" as sp 
+participant "c: Cloud" as c
+participant "i: Incident" as i
+participant "imp: ImportantLgger" as imp
+participant "t:Tile" as t
+participant "info: InfoLogger" as info
+participant "debug: DebugLogger" as debug
+participant "Logger" as l
+participant "m: Machine" as machine
+autoactivate on
+
+m -> p: createLogger(log_level, outputFile)
+group if log_level == IMPORTANT
+p -> imp: ImportantLogger(outputFile)
+imp --> p: log = imp
+end
+group if log_level == INFO
+p -> info: InfoLogger(outputFile)
+info --> p: log = info
+end
+group if log_level == DEBUG
+p -> debug: DebugLogger(outputFile)
+debug --> p: log = debug
+end
+p -> l: setConcreteLogger(log)
+l -->p
+p -->m
+m -> p: parse(mapFile, farmsFile, scenarioFile, start_year_tick, max_ticks)
+p -> mp ** : mapParser(mapFile)
+
+mp --> p: mp
+p -> mp: parseMap()
+
+    loop for each jsonTile in mapFile
+        mp -> mp: validateTile(jsonTile)
+        mp --> mp: True
+        mp -> mp: createTile(jsonTile)
+        
+        mp -> t **: Tile(jsonTile.id, jsonTile.coordinate, jsonTile.farm, jsonTile.airflow, jsonTile.direction, jsonTile.capacity, jsonTile.plant, jsonTile.shed)
+        activate t
+        t --> mp: t
+        mp -->mp 
+        mp -> mp: tiles.addTile(t)
+        mp --> mp:
+    end
+loop for each tile in tiles
+
+mp -> mp: validateAdjoiningTiles(tile)
+mp -> tile: getCoordinates()
+tile --> mp: coordinate
+mp -> coordinate: getAllNeighbors()
+coordinate --> mp: [c1, c2]
+mp -> mp: [c1.c2].map(getTileByCoordinate(it))
+mp --> mp: [t1, t2]
+group if tile is Farmstead
+mp -> mp: [t1, t2].all(!(it is Farmstead || it is MEADOW)
+mp --> mp: True
+end
+group if tile is Forest
+mp -> mp: [t1, t2].all(!(it is Village)
+mp --> mp: True
+end
+group if tile is Village
+mp -> mp: [t1, t2].all(!(it is Village)
+mp --> mp: True
+end
+mp --> p: tiles
+p -> l: logParseSuccess(mapFile)
+l --> p
+p -> fp ** : farmParser(farmsFile)
+activate fp
+fp --> p: fp
+
+p -> fp: parseFarms(tiles: Map<Int, Tile>)
+
+loop for each jsonFarm in farmsFile
+fp -> fp: validateFarm(jsonFarm, tiles)
+loop for each jsonMachine in jsonFarm.machines 
+fp -> fp: validateMachine(jsonMachine, tiles, jsonFarm.id)
+' ADD the null check
+fp -> fp: tiles.getTileById(jsonMachine.location)
+fp --> fp: t
+fp -> fp: t is Farmstead
+fp --> fp: True
+fp -> t: getShed()
+t --> fp: True
+fp -> t: getFarm()
+t --> fp: farmID
+fp -> fp: farmID == jsonFarm.id
+fp --> fp: True
+fp --> fp: True
+fp -> fp: createMachine(jsonMachine)
+fp -> machine ** : Machine(jsonMachine.id, jsonMachine.name, jsonMachine.actions, jsonMachine.plants, jsonMachine.duration, jsonMachine.location)
+activate machine
+machine --> fp: m
+fp --> fp: machines.add(m)
+end
+
+loop for each farmsteadID in jsonFarm.farmsteads
+fp -> mp: getTileByID(farmsteadID)
+mp --> fp: farmsteadTile
+fp -> fp: isFarmstead(farmsteadTile)
+fp --> fp: True
+fp -> fp: farmsteads.add(farmsteadTile) 
+fp --> fp:
+end
+loop for each fieldID in jsonFarm.farmsteads
+fp -> mp: getTileByID(fieldID)
+mp --> fp: fieldTile
+fp -> fp: isField(fieldTile)
+fp --> fp: True
+fp -> fp: fields.add(fieldTile) 
+fp --> fp:
+end
+loop for each plantationID in jsonFarm.plantations
+fp -> mp: getTileByID(plantationID)
+mp --> fp: plantationTile
+fp -> fp: isPlantation(plantationTile)
+fp --> fp: True
+fp -> fp: plantations.add(plantationTile) 
+fp --> fp:
+end
+end
+fp ---> p:
+p -> l: logParseSuccess(farmFile)
+l --> p
+p -> sp: scenarioParser(scenarioFile)
+sp --> p: sp
+p -> sp: parseScenario()
+sp -> sp: parseCloud()
+sp --> sp
+loop for each jsonCloud in scenario.file.clouds
+sp -> sp: validateCloud(jsonCloud)
+sp --> sp: True
+sp -> sp: createCloud(jsonCloud)
+sp -> c: Cloud(jsonCloud.id, jsonCloud.location, jsonCloud.duration, jsonCloud.amount)
+c --> sp: c
+sp --> sp: clouds.add(c)
+end
+sp -> sp: parseIncident()
+sp --> sp
+loop for each jsonIncident in scenario.file.incidents
+sp -> sp: validateIncident(jsonIncident)
+sp --> sp: True
+sp -> sp: createIncident(jsonIncident)
+sp -> i: Incident(jsonIncident.id, jsonIncident.type, jsonIncident.tick, jsonIncident.duration, jsonIncident.location, jsonIncident.radius, jsonIncident.amount, jsonIncident.effect, jsonIncident.machineid)
+i --> sp: i
+sp --> sp: incidents.add(i)
+end
+sp --> p
+p -> l: logParseSuccess(scenarioFile)
+l --> p
+p --> m
+
+
+@enduml

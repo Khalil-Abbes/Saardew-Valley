@@ -1,0 +1,186 @@
+{
+  "tiles": [
+    {
+      "id": 24,
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 23,
+      "coordinates": {
+        "x": 0,
+        "y": 2
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 22,
+      "coordinates": {
+        "x": 2,
+        "y": 2
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 21,
+      "coordinates": {
+        "x": 4,
+        "y": 2
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 20,
+      "coordinates": {
+        "x": 4,
+        "y": 0
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 19,
+      "coordinates": {
+        "x": 8,
+        "y": 0
+      },
+      "category": "ROAD",
+      "airflow": false
+    },
+    {
+      "id": 12,
+      "coordinates": {
+        "x": -1,
+        "y": -1
+      },
+      "category": "FARMSTEAD",
+      "airflow": false,
+      "farm": 0,
+      "shed": true
+    },
+    {
+      "id": 20,
+      "coordinates": {
+        "x": -1,
+        "y": 1
+      },
+      "category": "MEADOW",
+      "airflow": false
+    },
+    {
+      "id": 54,
+      "coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 52,
+      "coordinates": {
+        "x": 6,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 40,
+      "coordinates": {
+        "x": 0,
+        "y": 4
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 42,
+      "coordinates": {
+        "x": 2,
+        "y": 4
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 44,
+      "coordinates": {
+        "x": 4,
+        "y": 4
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 46,
+      "coordinates": {
+        "x": 6,
+        "y": 4
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 43,
+      "coordinates": {
+        "x": 8,
+        "y": 4
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    },
+    {
+      "id": 50,
+      "coordinates": {
+        "x": 8,
+        "y": 2
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 48,
+      "coordinates": {
+        "x": 6,
+        "y": 2
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["WHEAT"]
+    }
+  ]
+}

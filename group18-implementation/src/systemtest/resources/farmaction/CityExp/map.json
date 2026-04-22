@@ -1,0 +1,47 @@
+{
+  "tiles": [
+    {
+      "airflow": false,
+      "category": "FARMSTEAD",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "farm": 0,
+      "id": 0,
+      "shed": true
+    },
+    {
+      "airflow": false,
+      "capacity": 1200,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 2,
+        "y": 2
+      },
+      "farm": 0,
+      "id": 2,
+      "plant": "GRAPE"
+    },
+    {
+      "category": "VILLAGE",
+      "coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "id": 3
+    },
+    {
+      "airflow": false,
+      "capacity": 1200,
+      "category": "PLANTATION",
+      "coordinates": {
+        "x": 0,
+        "y": 2
+      },
+      "farm": 0,
+      "id": 4,
+      "plant": "GRAPE"
+    }
+  ]
+}

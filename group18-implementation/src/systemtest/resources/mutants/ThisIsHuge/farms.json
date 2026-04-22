@@ -1,0 +1,213 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Five-Field Pumpkin + Apple + Grapes(North)",
+      "farmsteads": [
+        1,
+        30,
+        170
+      ],
+      "fields": [
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "plantations": [
+        20,
+        160,
+        162,
+        164
+      ],
+      "machines": [
+        {
+          "id": 101,
+          "name": "Sower A",
+          "actions": [
+            "SOWING"
+          ],
+          "plants": [
+            "PUMPKIN"
+          ],
+          "duration": 1,
+          "location": 1
+        },
+        {
+          "id": 102,
+          "name": "Sower B",
+          "actions": [
+            "SOWING"
+          ],
+          "plants": [
+            "PUMPKIN"
+          ],
+          "duration": 2,
+          "location": 30
+        },
+        {
+          "id": 103,
+          "name": "Weeder",
+          "actions": [
+            "WEEDING"
+          ],
+          "plants": [
+            "PUMPKIN"
+          ],
+          "duration": 1,
+          "location": 1
+        },
+        {
+          "id": 104,
+          "name": "HarvesterFields",
+          "actions": [
+            "HARVESTING"
+          ],
+          "plants": [
+            "PUMPKIN"
+          ],
+          "duration": 1,
+          "location": 1
+        },
+        {
+          "id": 105,
+          "name": "Irrigator",
+          "actions": [
+            "IRRIGATING"
+          ],
+          "plants": [
+            "PUMPKIN"
+          ],
+          "duration": 1,
+          "location": 1
+        },
+        {
+          "id": 201,
+          "name": "PlantationHarvester",
+          "actions": [
+            "HARVESTING"
+          ],
+          "plants": [
+            "APPLE"
+          ],
+          "duration": 1,
+          "location": 1
+        },
+        {
+          "id": 210,
+          "name": "GrapeHarvester",
+          "actions": [
+            "HARVESTING"
+          ],
+          "plants": [
+            "GRAPE"
+          ],
+          "duration": 1,
+          "location": 170
+        },
+        {
+          "id": 211,
+          "name": "GrapeCutter",
+          "actions": [
+            "CUTTING"
+          ],
+          "plants": [
+            "GRAPE"
+          ],
+          "duration": 1,
+          "location": 170
+        },
+        {
+          "id": 212,
+          "name": "GrapeMower",
+          "actions": [
+            "MOWING"
+          ],
+          "plants": [
+            "GRAPE"
+          ],
+          "duration": 1,
+          "location": 170
+        },
+        {
+          "id": 213,
+          "name": "GrapeIrrigator",
+          "actions": [
+            "IRRIGATING"
+          ],
+          "plants": [
+            "GRAPE"
+          ],
+          "duration": 1,
+          "location": 170
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 501,
+          "tick": 10,
+          "plant": "PUMPKIN",
+          "fields": [
+            10,
+            12,
+            14,
+            16,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Potato Pair Farm",
+      "farmsteads": [
+        40
+      ],
+      "fields": [
+        42,
+        44
+      ],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 301,
+          "name": "PotatoPlanterWeeder",
+          "actions": [
+            "SOWING",
+            "WEEDING"
+          ],
+          "plants": [
+            "POTATO"
+          ],
+          "duration": 1,
+          "location": 40
+        },
+        {
+          "id": 302,
+          "name": "PotatoHarvesterIrrig",
+          "actions": [
+            "HARVESTING",
+            "IRRIGATING"
+          ],
+          "plants": [
+            "POTATO"
+          ],
+          "duration": 1,
+          "location": 40
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 601,
+          "tick": 6,
+          "plant": "POTATO",
+          "fields": [
+            42,
+            44
+          ]
+        }
+      ]
+    }
+  ]
+}

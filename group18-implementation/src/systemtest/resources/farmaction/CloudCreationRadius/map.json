@@ -1,0 +1,8 @@
+{
+  "tiles": [
+    { "id": 0, "coordinates": { "x": 1, "y": 1 }, "category": "FARMSTEAD", "farm": 0, "shed": true, "airflow": false },
+    { "id": 2, "coordinates": { "x": 2, "y": 2 }, "category": "FIELD", "farm": 0, "capacity": 2000, "possiblePlants": ["WHEAT"], "airflow": false },
+    { "id": 4, "coordinates": { "x": 3, "y": 3 }, "category": "MEADOW", "airflow": false },
+    { "id": 6, "coordinates": { "x": 4, "y": 2 }, "category": "VILLAGE" }
+  ]
+}

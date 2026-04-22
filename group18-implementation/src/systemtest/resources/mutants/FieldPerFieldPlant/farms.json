@@ -1,0 +1,51 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Field-Plant Demo Farm",
+      "farmsteads": [1],
+      "fields": [10, 12, 14, 16],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 101,
+          "name": "Sower",
+          "actions": ["SOWING"],
+          "plants": ["WHEAT", "OAT", "POTATO", "PUMPKIN"],
+          "duration": 2,
+          "location": 1
+        },
+        {
+          "id": 102,
+          "name": "Weeder",
+          "actions": ["WEEDING"],
+          "plants": ["WHEAT", "OAT", "POTATO", "PUMPKIN"],
+          "duration": 2,
+          "location": 1
+        },
+        {
+          "id": 103,
+          "name": "Harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["WHEAT", "OAT", "POTATO", "PUMPKIN"],
+          "duration": 2,
+          "location": 1
+        },
+        {
+          "id": 104,
+          "name": "Irrigator",
+          "actions": ["IRRIGATING"],
+          "plants": ["WHEAT", "OAT", "POTATO", "PUMPKIN"],
+          "duration": 2,
+          "location": 1
+        }
+      ],
+      "sowingPlans": [
+        { "id": 201, "tick": 18, "plant": "WHEAT",   "fields": [10] },
+        { "id": 202, "tick": 5,  "plant": "OAT",     "fields": [12] },
+        { "id": 203, "tick": 6,  "plant": "POTATO",  "fields": [14] },
+        { "id": 204, "tick": 10, "plant": "PUMPKIN", "fields": [16] }
+      ]
+    }
+  ]
+}

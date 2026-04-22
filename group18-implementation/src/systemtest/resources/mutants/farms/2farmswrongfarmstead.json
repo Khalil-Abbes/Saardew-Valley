@@ -1,0 +1,42 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "farm 0",
+      "farmsteads": [7],
+      "fields": [2],
+      "plantations": [4],
+      "machines": [
+        {
+          "id": 1,
+          "name": "machine 0",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE", "PUMPKIN"],
+          "duration": 4,
+          "location": 7
+        }
+      ],
+      "sowingPlans": [
+      ]
+    },
+    {
+      "id": 1,
+      "name": "farm 1",
+      "farmsteads": [0],
+      "fields": [5],
+      "plantations": [1],
+      "machines": [
+        {
+          "id": 2,
+          "name": "machine 1",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE", "PUMPKIN"],
+          "duration": 4,
+          "location": 0
+        }
+      ],
+      "sowingPlans": [
+      ]
+    }
+  ]
+}

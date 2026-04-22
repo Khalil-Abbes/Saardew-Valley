@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "Apple Farm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [1],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Cutter",
+          "actions": ["CUTTING"],
+          "plants": ["APPLE"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

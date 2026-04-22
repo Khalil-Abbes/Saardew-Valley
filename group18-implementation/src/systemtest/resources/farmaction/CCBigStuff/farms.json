@@ -1,0 +1,32 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "CityExpansion EdgeCase Farm",
+      "farmsteads": [100],
+      "fields": [20, 22, 24, 26, 32],
+      "plantations": [30],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Grape Harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["GRAPE"],
+          "duration": 4,
+          "location": 100
+        },
+        {
+          "id": 1,
+          "name": "Wheat Seeder",
+          "actions": ["SOWING"],
+          "plants": ["WHEAT"],
+          "duration": 4,
+          "location": 100
+        }
+      ],
+      "sowingPlans": [
+        { "id": 1, "tick": 0, "plant": "WHEAT", "fields": [20, 22] }
+      ]
+    }
+  ]
+}

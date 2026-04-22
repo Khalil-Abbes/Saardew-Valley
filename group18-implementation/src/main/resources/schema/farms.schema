@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "farms": {
+            "type": "array",
+            "items": {
+                "$ref": "farm.schema#/$defs/farm"
+            },
+            "minItems": 1
+        }
+    },
+    "required": [ "farms" ],
+}

@@ -1,0 +1,20 @@
+{
+  "clouds": [],
+  "incidents": [
+    {
+      "id": 0,
+      "type": "DROUGHT",
+      "tick": 0,
+      "location": 1,
+      "radius": 0
+    },
+    {
+      "id": 1,
+      "type": "BEE_HAPPY",
+      "tick": 1,
+      "location": 2,
+      "radius": 3,
+      "effect": 25
+    }
+  ]
+}

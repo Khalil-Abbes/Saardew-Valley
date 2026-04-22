@@ -1,0 +1,46 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Plantation Demo Farm",
+      "farmsteads": [1],
+      "fields": [],
+      "plantations": [10, 12, 14, 16],
+      "machines": [
+        {
+          "id": 201,
+          "name": "PlantationHarvester",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE", "CHERRY", "GRAPE", "ALMOND"],
+          "duration": 2,
+          "location": 1
+        },
+        {
+          "id": 202,
+          "name": "PlantationCutter",
+          "actions": ["CUTTING"],
+          "plants": ["APPLE", "CHERRY", "GRAPE", "ALMOND"],
+          "duration": 4,
+          "location": 1
+        },
+        {
+          "id": 203,
+          "name": "PlantationMower",
+          "actions": ["MOWING"],
+          "plants": ["APPLE", "CHERRY", "GRAPE", "ALMOND"],
+          "duration": 5,
+          "location": 1
+        },
+        {
+          "id": 204,
+          "name": "PlantationIrrigator",
+          "actions": ["IRRIGATING"],
+          "plants": ["APPLE", "CHERRY", "GRAPE", "ALMOND"],
+          "duration": 6,
+          "location": 1
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

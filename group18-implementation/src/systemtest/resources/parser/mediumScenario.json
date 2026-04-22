@@ -1,0 +1,59 @@
+{
+  "clouds": [
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "type": "ANIMAL_ATTACK",
+      "tick": 5,
+      "location": 2,
+      "radius": 2
+    },
+    {
+      "id": 2,
+      "type": "ANIMAL_ATTACK",
+      "tick": 6,
+      "location": 60,
+      "radius": 2
+    },
+    {
+      "id": 3,
+      "type": "ANIMAL_ATTACK",
+      "tick": 7,
+      "location": 57,
+      "radius": 2
+    },
+    {
+      "id": 4,
+      "type": "ANIMAL_ATTACK",
+      "tick": 8,
+      "location": 5,
+      "radius": 2
+    },
+    {
+      "id": 5,
+      "type": "BEE_HAPPY",
+      "tick": 9,
+      "location": 36,
+      "radius": 1,
+      "effect": 100
+    },
+    {
+      "id": 6,
+      "type": "BEE_HAPPY",
+      "tick": 9,
+      "location": 14,
+      "radius": 1,
+      "effect": 100
+    },
+    {
+      "id": 7,
+      "type": "BEE_HAPPY",
+      "tick": 9,
+      "location": 50,
+      "radius": 1,
+      "effect": 100
+    }
+  ]
+
+}

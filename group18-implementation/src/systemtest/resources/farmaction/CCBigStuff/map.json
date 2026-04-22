@@ -1,0 +1,92 @@
+{
+  "tiles": [
+    {
+      "id": 100,
+      "coordinates": { "x": 1, "y": 1 },
+      "category": "FARMSTEAD",
+      "farm": 0,
+      "shed": true,
+      "airflow": false
+    },
+
+    { "id": 200, "coordinates": { "x": 2, "y": 2 }, "category": "VILLAGE" },
+    { "id": 201, "coordinates": { "x": 1, "y": 3 }, "category": "VILLAGE" },
+    { "id": 204, "coordinates": { "x": 6, "y": 0 }, "category": "VILLAGE" },
+
+    {
+      "id": 30,
+      "coordinates": { "x": 4, "y": 2 },
+      "category": "PLANTATION",
+      "farm": 0,
+      "capacity": 2000,
+      "plant": "GRAPE",
+      "airflow": false
+    },
+
+    { "id": 110, "coordinates": { "x": 2, "y": 0 }, "category": "ROAD", "airflow": false },
+    {
+      "id": 112,
+      "coordinates": { "x": 4, "y": 0 },
+      "category": "ROAD",
+      "airflow": true,
+      "direction": "270"
+    },
+    { "id": 111, "coordinates": { "x": 3, "y": 1 }, "category": "ROAD", "airflow": false },
+    { "id": 203, "coordinates": { "x": 3, "y": 3 }, "category": "ROAD", "airflow": false },
+
+    {
+      "id": 20,
+      "coordinates": { "x": 0, "y": 2 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1200,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    {
+      "id": 22,
+      "coordinates": { "x": 0, "y": 4 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1200,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    {
+      "id": 32,
+      "coordinates": { "x": 2, "y": 4 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1200,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    {
+      "id": 24,
+      "coordinates": { "x": 4, "y": 4 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1200,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+
+    { "id": 115, "coordinates": { "x": 5, "y": 1 }, "category": "ROAD", "airflow": false },
+    { "id": 121, "coordinates": { "x": 7, "y": 1 }, "category": "ROAD", "airflow": false },
+    { "id": 123, "coordinates": { "x": 7, "y": 3 }, "category": "ROAD", "airflow": false },
+    { "id": 40, "coordinates": { "x": 6, "y": 2 }, "category": "ROAD", "airflow": false },
+
+    {
+      "id": 26,
+      "coordinates": { "x": 6, "y": 4 },
+      "category": "FIELD",
+      "farm": 0,
+      "capacity": 1200,
+      "possiblePlants": ["WHEAT"],
+      "airflow": false
+    },
+    { "id": 44, "coordinates": { "x": 8, "y": 2 }, "category": "ROAD", "airflow": false },
+
+    { "id": 125, "coordinates": { "x": 1, "y": 5 }, "category": "ROAD", "airflow": false }
+  ]
+}

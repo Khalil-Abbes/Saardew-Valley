@@ -1,0 +1,30 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "BrokenMachine Farm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [2],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Grape Harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["GRAPE"],
+          "duration": 3,
+          "location": 0
+        },
+        {
+          "id": 1,
+          "name": "Grape Cutter",
+          "actions": ["CUTTING"],
+          "plants": ["GRAPE"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

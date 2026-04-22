@@ -1,0 +1,187 @@
+[INFO] Simulation Info: Simulation started at tick 7 within the year.
+[INFO] Simulation Info: Tick 0 started at tick 7 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 1 rained down 570 L water.
+[INFO] Cloud Movement: Cloud 1 with 7430 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 137.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 2 rained down 900 L water.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 137.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 134.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 134.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 131.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 131.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 128.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 128.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 125.
+[INFO] Cloud Movement: Cloud 1 with 6530 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 125.
+[DEBUG] Cloud Position: Cloud 1 is on tile 1, where the amount of sunlight is 75.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1239300 g of APPLE.
+[INFO] Simulation Info: Tick 1 started at tick 8 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 1 rained down 70 L water.
+[INFO] Cloud Movement: Cloud 1 with 6460 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 137.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 2 rained down 100 L water.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 137.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 134.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 134.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 131.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 131.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 128.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 128.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 125.
+[INFO] Cloud Movement: Cloud 1 with 6360 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 125.
+[DEBUG] Cloud Position: Cloud 1 is on tile 1, where the amount of sunlight is 75.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 903449 g of APPLE.
+[INFO] Simulation Info: Tick 2 started at tick 9 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 1 rained down 70 L water.
+[INFO] Cloud Movement: Cloud 1 with 6290 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 165.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 2 rained down 100 L water.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 165.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 162.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 162.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 159.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 159.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 156.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 156.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 153.
+[INFO] Cloud Movement: Cloud 1 with 6190 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 153.
+[DEBUG] Cloud Position: Cloud 1 is on tile 1, where the amount of sunlight is 103.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 592751 g of APPLE.
+[INFO] Simulation Info: Tick 3 started at tick 10 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 1 rained down 70 L water.
+[INFO] Cloud Movement: Cloud 1 with 6120 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 165.
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 2 rained down 100 L water.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 165.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 162.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 162.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 159.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 159.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 156.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 156.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 153.
+[INFO] Cloud Movement: Cloud 1 with 6020 L water moved from tile 2 to tile 1.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 153.
+[INFO] Cloud Dissipation: Cloud 1 dissipates on tile 1.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 388902 g of APPLE.
+[INFO] Simulation Info: Tick 4 started at tick 11 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[DEBUG] Harvest Estimate: Required actions on tile 2 were not performed: MOWING.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 229641 g of APPLE.
+[INFO] Simulation Info: Tick 5 started at tick 12 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 150666 g of APPLE.
+[INFO] Simulation Info: Tick 6 started at tick 13 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 98851 g of APPLE.
+[INFO] Simulation Info: Tick 7 started at tick 14 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 64854 g of APPLE.
+[INFO] Simulation Info: Tick 8 started at tick 15 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 42549 g of APPLE.
+[INFO] Simulation Info: Tick 9 started at tick 16 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 27915 g of APPLE.
+[INFO] Simulation Info: Tick 10 started at tick 17 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[DEBUG] Harvest Estimate: Required actions on tile 2 were not performed: MOWING.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 18314 g of APPLE.
+[INFO] Simulation Info: Tick 11 started at tick 18 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 13349 g of APPLE.
+[INFO] Simulation Info: Tick 12 started at tick 19 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[DEBUG] Harvest Estimate: Required actions on tile 2 were not performed: HARVESTING.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 5406 g of APPLE.
+[INFO] Simulation Info: Tick 13 started at tick 20 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[DEBUG] Harvest Estimate: Required actions on tile 2 were not performed: HARVESTING.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 0 g of APPLE.
+[INFO] Simulation Info: Tick 14 started at tick 21 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1530000 g of APPLE.
+[INFO] Simulation Info: Tick 15 started at tick 22 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1377000 g of APPLE.
+[INFO] Simulation Info: Tick 16 started at tick 23 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1239300 g of APPLE.
+[INFO] Simulation Info: Tick 17 started at tick 24 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1115370 g of APPLE.
+[INFO] Simulation Info: Tick 18 started at tick 1 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 1003833 g of APPLE.
+[INFO] Simulation Info: Tick 19 started at tick 2 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 903449 g of APPLE.
+[INFO] Simulation Info: Tick 20 started at tick 3 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 731793 g of APPLE.
+[INFO] Simulation Info: Tick 21 started at tick 4 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[DEBUG] Harvest Estimate: Required actions on tile 2 were not performed: CUTTING.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 296375 g of APPLE.
+[INFO] Simulation Info: Tick 22 started at tick 5 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 216056 g of APPLE.
+[INFO] Simulation Info: Tick 23 started at tick 6 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 157504 g of APPLE.
+[INFO] Simulation Info: Tick 24 started at tick 7 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 114819 g of APPLE.
+[INFO] Simulation Info: Tick 25 started at tick 8 within the year.
+[INFO] Soil Moisture: The soil moisture is below threshold in 0 FIELD and 0 PLANTATION tiles.
+[INFO] Harvest Estimate: Harvest estimate on tile 2 changed to 83702 g of APPLE.
+[IMPORTANT] Simulation Info: Simulation ended at tick 26.
+[IMPORTANT] Simulation Info: Simulation statistics are calculated.
+[IMPORTANT] Simulation Statistics: Total amount of POTATO harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of WHEAT harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of OAT harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of PUMPKIN harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of APPLE harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of GRAPE harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of ALMOND harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total amount of CHERRY harvested: 0 g.
+[IMPORTANT] Simulation Statistics: Total harvest estimate still in fields and plantations: 0 g.

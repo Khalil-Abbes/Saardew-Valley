@@ -1,0 +1,45 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Very Cool Farm",
+      "farmsteads": [1, 8],
+      "fields": [4, 5, 9, 10],
+      "plantations": [],
+      "machines": [
+        {
+          "id": 1,
+          "name": "IrrigatingTractor",
+          "actions": ["IRRIGATING"],
+          "plants": ["OAT", "WHEAT", "POTATO", "PUMPKIN"],
+          "duration": 4,
+          "location": 1
+        },
+        {
+          "id": 2,
+          "name": "FieldTractor1",
+          "actions": ["SOWING", "WEEDING", "HARVESTING"],
+          "plants": ["OAT", "WHEAT", "POTATO", "PUMPKIN"],
+          "duration": 4,
+          "location": 1
+        },
+        {
+          "id": 3,
+          "name": "FieldTractor2",
+          "actions": ["SOWING", "WEEDING", "HARVESTING"],
+          "plants": ["OAT", "WHEAT", "POTATO", "PUMPKIN"],
+          "duration": 4,
+          "location": 1
+        }
+      ],
+      "sowingPlans": [
+        {
+          "id": 1,
+          "tick": 0,
+          "plant": "POTATO",
+          "fields": [9]
+        }
+      ]
+    }
+  ]
+}

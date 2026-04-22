@@ -1,0 +1,501 @@
+@startuml SimulationSystem
+
+' =====================
+' === Data Layer ===
+' =====================
+
+class SimulationData {
+  - map: SimulationMap
+  - farms: Map<Int, Farm>
+  - machines: Map<Int, Machine>
+  - tiles: Map<Int, Tile>
+  - clouds: List<Cloud>
+  - incidents: List<Incident>
+  - currentTick: Int
+  - maxTick: Int
+}
+
+class SimulationMap <<Singleton>> {
+  - clouds: List<Cloud>
+  - farms: Map<Int, Farm>
+  - idToTile: Map<Int, Tile>
+  - coordinateToTile: Map<Pair<Int, Int>, Tile>
+  + getTileById(id: Int): Tile
+  + getNeighborTile(tile: Tile, direction: Direction): Tile
+  + getNeighborTiles(tile: Tile): List<Tile>
+  + getAllNeighborTilesInRadius(tile: Tile, radius: Int): List<Tile>
+  + addCloud(cloud: Cloud): Unit
+  + removeCloud(cloud: Cloud): Unit
+  + updateMapOnExpansion(tile: Tile): Unit
+  + getHighestCloudId(): Int
+  + decreaseCloudyTilesSunlight(): Unit
+  + shortestPathLength(start: Tile, target: Tile): Int?
+}
+
+abstract class Tile {
+  - id: Int
+  - coordinate: Pair<Int, Int>
+  - capacity: Int
+  - airflow: Boolean
+  - direction: Direction
+  - hasShed: Boolean
+}
+
+class Farmstead {
+}
+
+class Field {
+  - plant: FieldPlant
+  - currentMoisture: Int
+  - sunlightThisTick: Int
+  - beeBonusThisTickPct: Int
+  - sowTick: Int?
+  - weedingDoneTicks: Set<Int>
+  - fallowUntilTick: Int?
+  - harvestedThisTick: Boolean
+  - operatedOnThisTick: Boolean
+  - harvestEstimate: Int
+}
+
+class Plantation {
+  - plant: PlantationPlant
+  - currentMoisture: Int
+  - sunlightThisTick: Int
+  - beeBonusThisTickPct: Int
+  - cutThisCycle: Boolean
+  - mowingDoneTicks: Set<Int>
+  - harvestedThisTick: Boolean
+  - operatedOnThisTick: Boolean
+  - permanentDisabled: Boolean
+  - harvestEstimate: Int
+}
+
+class Meadow {
+}
+
+class Road {
+}
+
+class Village {
+}
+
+class EmptyTile {
+}
+
+Tile <|-- Farmstead
+Tile <|-- Field
+Tile <|-- Plantation
+Tile <|-- Meadow
+Tile <|-- Road
+Tile <|-- Village
+Tile <|-- EmptyTile
+
+class Farm {
+  - id: Int
+  - name: String
+  - farmsteads: List<Farmstead>
+  - fields: List<Field>
+  - plantations: List<Plantation>
+  - machines: List<Machine>
+  - machineToShed: Map<Machine, Farmstead>
+  - totalHarvestByPlant: Map<PlantType, Int>
+}
+
+class Machine {
+  - id: Int
+  - name: String
+  - actions: List<ActionType>
+  - designatedPlants: List<PlantType>
+  - duration: Int
+  - location: Tile
+  - distanceTraveled: Int
+  - repairDuration: Int
+  - isAvailable: Boolean
+  - homeShed: Farmstead
+  - cargo: Map<PlantType, Int>
+  - sowingDoneTick: Int?
+}
+
+class Cloud {
+  - id: Int
+  - duration: Int
+  - location: Tile
+  - amount: Int
+}
+
+abstract class Incident {
+  # id: Int
+  # tick: Int
+  # type: IncidentType
+  {abstract} + perform(data: SimulationData): Unit
+}
+
+' Relationships among data
+Farm o-- Machine
+Farm o-- Farmstead
+Farm o-- Field
+Farm o-- Plantation
+
+SimulationData o-- SimulationMap
+SimulationMap o-- Tile
+SimulationMap o-- Farm
+SimulationMap o-- Cloud
+
+SimulationData o-- Farm
+SimulationData o-- Machine
+SimulationData o-- Cloud
+SimulationData o-- Incident
+
+' =====================
+' === Enums / Value Objects ===
+' =====================
+
+enum ActionType {
+  SOWING
+  CUTTING
+  MOWING
+  WEEDING
+  IRRIGATING
+  HARVESTING
+}
+
+enum PlantType {
+  POTATO
+  WHEAT
+  OAT
+  PUMPKIN
+  APPLE
+  GRAPE
+  ALMOND
+  CHERRY
+}
+
+enum Direction {
+  ANGLE_0
+  ANGLE_45
+  ANGLE_90
+  ANGLE_135
+  ANGLE_180
+  ANGLE_225
+  ANGLE_270
+  ANGLE_315
+}
+
+enum IncidentType {
+  CLOUD_CREATION
+  BEE_HAPPY
+  DROUGHT
+  BROKEN_MACHINE
+  CITY_EXPANSION
+}
+
+enum Pollination {
+  NONE
+  SELF
+  INSECTS
+}
+
+class Window {
+  - startTick: Int
+  - endTick: Int
+  + contains(yearTick: Int): Boolean
+}
+
+class LateRule {
+  - perTickPenaltyPct: Int
+  - ticksAllowed: Int
+}
+
+class FieldWeedingRule {
+  - offsets: List<Int>
+  - everyN: Int?
+}
+
+abstract class Plant {
+  - type: PlantType
+  - initialEstimate: Int
+  - moistureRequired: Int
+  - sunlightComfort: Int
+  - pollination: Pollination
+  - harvestWindows: List<Window>
+  - harvestLate: LateRule?
+  - bloomWindows: List<Window>
+  - plantationHarvestWindows: List<Window>
+  - plantationHarvestLate: LateRule?
+  + isInBloomWindow(sowingTick: Int, yearTick: Int): Boolean
+  + isInHarvestWindow(yearTick: Int): Boolean
+}
+
+class FieldPlant {
+  - sowWindows: List<Window>
+  - sowingLate: LateRule?
+  - progress: Map<ActionType, Int>
+  - plantType: PlantType
+  - weedingRule: FieldWeedingRule?
+  + isInSowingWindow(yearTick: Int): Boolean
+  + isInWeedingWindow(sowingTick: Int, yearTick: Int): Boolean
+}
+
+class PlantationPlant {
+  - cuttingWindows: List<Window>
+  - mowingWindows: List<Window>
+  + isInCuttingWindow(yearTick: Int): Boolean
+  + isInMowingWindow(yearTick: Int): Boolean
+}
+
+' Wiring value objects and enums to plants/tiles/machines
+Plant o-- Window
+Plant o-- LateRule
+Plant o-- PlantType
+Plant o-- Pollination
+
+FieldPlant --|> Plant
+PlantationPlant --|> Plant
+FieldPlant o-- FieldWeedingRule
+
+Field o-- FieldPlant
+Plantation o-- PlantationPlant
+
+Machine o-- PlantType
+Machine o-- ActionType
+Tile o-- Direction
+
+' =====================
+' === Harvest Calculation ===
+' =====================
+
+class HarvestInputs {
+  - isField: Boolean
+  - yearTick: Int
+  - sunlightThisTick: Int
+  - currentMoisture: Int
+  - capacity: Int
+  - weedingDoneTicks: Set<Int>
+  - mowingDoneTicks: Set<Int>
+  - cutThisCycle: Boolean
+  - harvestedThisTick: Boolean
+  - beeBonusThisTickPct: Int
+  - plantationDisabled: Boolean
+}
+
+class HarvestCalculator {
+  + compute(prevEstimate: Int, inputs: HarvestInputs, plant: Plant): Int
+}
+
+HarvestCalculator ..> HarvestInputs
+HarvestCalculator ..> Plant
+HarvestInputs ..> Field
+HarvestInputs ..> Plantation
+
+' =====================
+' === Incident Subclasses ===
+' =====================
+
+class CloudCreationIncident {
+  - duration: Int
+  - locationId: Int
+  - radius: Int
+  - amount: Int
+  + perform(data: SimulationData): Unit
+}
+
+class BeeHappyIncident {
+  - locationId: Int
+  - radius: Int
+  - effect: Int
+  + perform(data: SimulationData): Unit
+}
+
+class DroughtIncident {
+  - locationId: Int
+  - radius: Int
+  + perform(data: SimulationData): Unit
+}
+
+class BrokenMachineIncident {
+  - duration: Int
+  - machineId: Int
+  + perform(data: SimulationData): Unit
+}
+
+class CityExpansionIncident {
+  - locationId: Int
+  + perform(data: SimulationData): Unit
+}
+
+Incident <|-- CloudCreationIncident
+Incident <|-- BeeHappyIncident
+Incident <|-- DroughtIncident
+Incident <|-- BrokenMachineIncident
+Incident <|-- CityExpansionIncident
+Incident o-- IncidentType
+
+' =====================
+' === Controllers (Services) ===
+' =====================
+
+class FarmController {
+  + runFarms(data: SimulationData): Unit
+  + getSowableFields(data: SimulationData, farmId: Int): List<Field>
+  + getHarvestablePlantations(data: SimulationData, farmId: Int): List<Plantation>
+  + assignMachines(data: SimulationData, farmId: Int): Unit
+  + updateHarvestTotals(data: SimulationData, farmId: Int, harvest: Map<PlantType, Int>): Unit
+}
+
+class MachineController {
+  + performAction(data: SimulationData, machineId: Int, action: ActionType, tileId: Int): Boolean
+  + move(data: SimulationData, machineId: Int, targetId: Int): Boolean
+  + continueMove(data: SimulationData, machineId: Int): Boolean
+  + returnToShed(data: SimulationData, machineId: Int): Boolean
+  + unloadCargo(data: SimulationData, machineId: Int, farmId: Int): Unit
+  + isAvailable(data: SimulationData, machineId: Int, tick: Int): Boolean
+  + canHandle(data: SimulationData, machineId: Int, plantType: PlantType): Boolean
+}
+
+class CloudController {
+  + create(data: SimulationData, locationId: Int, radius: Int, duration: Int, amount: Int): Cloud
+  + move(data: SimulationData, cloudId: Int): Unit
+  + rain(data: SimulationData, cloudId: Int): Unit
+  + merge(data: SimulationData, c1: Int, c2: Int): Cloud
+  + dissipateExpired(data: SimulationData): Unit
+}
+
+class IncidentController {
+  + trigger(data: SimulationData, incidentId: Int): Unit
+  + applyCloudCreation(data: SimulationData, incident: CloudCreationIncident): Unit
+  + applyBeeHappy(data: SimulationData, incident: BeeHappyIncident): Unit
+  + applyDrought(data: SimulationData, incident: DroughtIncident): Unit
+  + applyBrokenMachine(data: SimulationData, incident: BrokenMachineIncident): Unit
+  + applyCityExpansion(data: SimulationData, incident: CityExpansionIncident): Unit
+}
+
+class HarvestController {
+  + computeHarvest(data: SimulationData, farmId: Int, plantType: PlantType): Int
+}
+
+class MapController {
+  + getTileById(data: SimulationData, id: Int): Tile
+  + getNeighborTiles(data: SimulationData, tileId: Int): List<Tile>
+  + getAllNeighborTilesInRadius(data: SimulationData, tileId: Int, radius: Int): List<Tile>
+  + shortestPathLength(data: SimulationData, startId: Int, targetId: Int): Int?
+  + expandCity(data: SimulationData, tileId: Int): Unit
+}
+
+FarmController --> SimulationData
+MachineController --> SimulationData
+CloudController --> SimulationData
+IncidentController --> SimulationData
+HarvestController --> SimulationData
+MapController --> SimulationData
+
+' =====================
+' === Simulation Orchestrator ===
+' =====================
+
+class Simulation {
+  - data: SimulationData
+  - farmController: FarmController
+  - machineController: MachineController
+  - cloudController: CloudController
+  - incidentController: IncidentController
+  - harvestController: HarvestController
+  - mapController: MapController
+  - logger: Logger
+  + run(): Unit
+  - runTick(tick: Int): Unit
+  - farmPhase(): Unit
+  - cloudPhase(): Unit
+  - incidentPhase(): Unit
+  - harvestPhase(): Unit
+}
+
+Simulation --> SimulationData
+Simulation --> FarmController
+Simulation --> MachineController
+Simulation --> CloudController
+Simulation --> IncidentController
+Simulation --> HarvestController
+Simulation --> MapController
+
+' =====================
+' === Main & Parsers ===
+' =====================
+
+class Main {
+  + main(): Unit
+}
+
+class Parser {
+  + parse(mapFile: String, farmsFile: String, scenarioFile: String, startYearTick: Int, maxTicks: Int): SimulationData
+}
+
+class MapParser <<Singleton>> {
+  + parseMap(file: String): Map<Int, Tile>
+  + getTileById(tileId: Int): Tile
+}
+
+class FarmParser <<Singleton>> {
+  + parseFarms(file: String): Map<Int, Farm>
+  + validateFarm(json: String): Boolean
+  + validateMachine(json: String): Boolean
+  + createMachine(json: String): Machine
+}
+
+class ScenarioParser <<Singleton>> {
+  + parseScenario(file: String): List<Incident>
+  + validateCloudCreationParams(location: Int, radius: Int, duration: Int, amount: Int): Boolean
+}
+
+Main --> Simulation
+Main --> Parser
+Parser --> MapParser
+Parser --> FarmParser
+Parser --> ScenarioParser
+
+' =====================
+' === Logger Hierarchy ===
+' =====================
+
+class Logger {
+  + logInvalidFile(filename: String): Unit
+  + logSimulationStart(yearTick: Int): Unit
+  + logSimulationEnd(tick: Int): Unit
+  + logTickStart(tick: Int, yearTick: Int): Unit
+  + logFarmStart(farmId: Int): Unit
+  + logFarmAction(machineId: Int, actionType: ActionType, tileId: Int, duration: Int): Unit
+  + logFarmSowing(machineId: Int, plant: PlantType): Unit
+  + logFarmHarvest(machineId: Int, amount: Int, plant: PlantType): Unit
+  + logMachineReturn(machineId: Int, tileId: Int): Unit
+  + logMachineUnload(machineId: Int, amount: Int, plant: PlantType): Unit
+  + logFarmFinish(farmId: Int): Unit
+  + logIncident(incidentId: Int, incidentType: IncidentType, tileIds: List<Int>): Unit
+  + logCloudRain(cloudId: Int, tileId: Int, amount: Int): Unit
+  + logCloudUnion(cloudIdFromTile: Int, cloudIdMovingToTile: Int, cloudIdNew: Int, amount: Int, duration: Int, tileId: Int): Unit
+  + logCloudMovement(cloudId: Int, amountFluid: Int, startTileId: Int, endTileId: Int): Unit
+  + logCloudStuck(cloudId: Int, tileId: Int): Unit
+  + logCloudDissipation(cloudId: Int, tileId: Int): Unit
+  + logCloudPosition(cloudId: Int, tileId: Int, amountSunLight: Int): Unit
+  + logSoilMoisture(amountField: Int, amountPlantation: Int): Unit
+  + logHarvestCollect(farmId: Int, amount: Int): Unit
+  + logTotalHarvest(plant: PlantType, amount: Int): Unit
+  + logHarvestEstimateChange(tileId: Int, amount: Int, plant: PlantType): Unit
+  + logHarvestEstimate(tileId: Int, actions: List<ActionType>): Unit
+  + logSimulationInfo(): Unit
+  + logParseSuccess(filename: String): Unit
+}
+
+class ImportantLogger {
+}
+
+class InfoLogger {
+}
+
+class DebugLogger {
+}
+
+ImportantLogger -|> Logger
+InfoLogger -|> ImportantLogger
+DebugLogger -|> InfoLogger
+Simulation --> Logger
+
+@enduml

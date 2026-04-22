@@ -1,0 +1,26 @@
+[IMPORTANT] Cloud Rain: Cloud 1 on tile 1 rained down 4500 L water.
+[INFO] Cloud Movement: Cloud 1 with 1500 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 67.
+[INFO] Cloud Movement: Cloud 1 with 1500 L water moved from tile 2 to tile 7.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 77.
+[IMPORTANT] Cloud Union: Clouds 2 and 1 united to cloud 10 with 2500 L water and duration 2 on tile 7.
+[IMPORTANT] Cloud Rain: Cloud 3 on tile 3 rained down 6000 L water.
+[INFO] Cloud Dissipation: Cloud 3 dissipates on tile 3.
+[INFO] Cloud Movement: Cloud 4 with 1000 L water moved from tile 9 to tile 1.
+[INFO] Cloud Movement: Cloud 4 with 1000 L water moved from tile 1 to tile 2.
+[DEBUG] Cloud Movement: On tile 1, the amount of sunlight is 64.
+[INFO] Cloud Movement: Cloud 4 with 1000 L water moved from tile 2 to tile 7.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 74.
+[IMPORTANT] Cloud Union: Clouds 10 and 4 united to cloud 11 with 3500 L water and duration 2 on tile 7.
+[INFO] Cloud Dissipation: Cloud 6 got stuck on tile 10.
+[INFO] Cloud Movement: Cloud 7 with 200 L water moved from tile 11 to tile 2.
+[INFO] Cloud Movement: Cloud 7 with 200 L water moved from tile 2 to tile 7.
+[DEBUG] Cloud Movement: On tile 2, the amount of sunlight is 71.
+[IMPORTANT] Cloud Union: Clouds 11 and 7 united to cloud 12 with 3700 L water and duration 2 on tile 7.
+[IMPORTANT] Cloud Rain: Cloud 8 on tile 12 rained down 4000 L water.
+[INFO] Cloud Movement: Cloud 9 with 1000 L water moved from tile 13 to tile 3.
+[INFO] Cloud Dissipation: Cloud 9 dissipates on tile 3.
+[IMPORTANT] Cloud Rain: Cloud 6 on tile 10 rained down 5000 L water.
+[INFO] Cloud Dissipation: Cloud 6 dissipates on tile 10.
+[DEBUG] Cloud Position: Cloud 12 is on tile 7, where the amount of sunlight is 40.
+[DEBUG] Cloud Position: Cloud 8 is on tile 12, where the amount of sunlight is 0.

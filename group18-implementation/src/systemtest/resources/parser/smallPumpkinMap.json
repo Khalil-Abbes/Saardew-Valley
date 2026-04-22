@@ -1,0 +1,36 @@
+{
+  "tiles": [
+    {
+      "id": 1,
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "category": "FIELD",
+      "airflow": false,
+      "farm": 0,
+      "capacity": 1000,
+      "possiblePlants": ["PUMPKIN"]
+    },
+    {
+      "id": 2,
+      "coordinates": {
+        "x": 1,
+        "y": -1
+      },
+      "category": "FARMSTEAD",
+      "airflow": false,
+      "farm": 0,
+      "shed": true
+    },
+    {
+      "id": 3,
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "category": "MEADOW",
+      "airflow": false
+    }
+  ]
+}

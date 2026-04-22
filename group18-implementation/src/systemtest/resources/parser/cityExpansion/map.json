@@ -1,0 +1,32 @@
+{
+  "tiles": [
+    {
+      "id": 1,
+      "coordinates": { "x": 0, "y": 0 },
+      "category": "VILLAGE"
+    },
+    {
+      "id": 2,
+      "coordinates": { "x": 0, "y": 2 },
+      "category": "FIELD",
+      "farm": 1,
+      "capacity": 520,
+      "possiblePlants": ["PUMPKIN", "OAT"],
+      "airflow": false
+    },
+    {
+      "id": 3,
+      "coordinates": { "x": 1, "y": 1 },
+      "category": "FARMSTEAD",
+      "farm": 1,
+      "shed": true,
+      "airflow": false
+    },
+    {
+      "id": 4,
+      "coordinates": { "x": 0, "y":  4},
+      "category": "FOREST",
+      "airflow": false
+    }
+  ]
+}

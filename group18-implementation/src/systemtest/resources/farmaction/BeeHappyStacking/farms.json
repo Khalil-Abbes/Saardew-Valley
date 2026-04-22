@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "BeeStack Farm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [2],
+      "machines": [
+        {
+          "id": 0,
+          "name": "IdleSeeder",
+          "actions": ["SOWING"],
+          "plants": ["POTATO"],
+          "duration": 14,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

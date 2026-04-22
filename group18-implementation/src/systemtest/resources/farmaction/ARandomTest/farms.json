@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 100,
+      "name": "Irrigation farm",
+      "farmsteads": [102],
+      "fields": [],
+      "plantations": [101],
+      "machines": [
+        {
+          "id": 500,
+          "name": "Apple and Oat harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE", "OAT"],
+          "duration": 12,
+          "location": 102
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

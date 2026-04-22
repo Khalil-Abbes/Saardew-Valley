@@ -1,0 +1,22 @@
+{
+  "farms": [
+    {
+      "id": 0,
+      "name": "VillageBlock Farm",
+      "farmsteads": [0],
+      "fields": [],
+      "plantations": [4],
+      "machines": [
+        {
+          "id": 0,
+          "name": "Apple Harvester",
+          "actions": ["HARVESTING"],
+          "plants": ["APPLE"],
+          "duration": 2,
+          "location": 0
+        }
+      ],
+      "sowingPlans": []
+    }
+  ]
+}

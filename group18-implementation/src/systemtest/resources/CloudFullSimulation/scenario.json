@@ -1,0 +1,96 @@
+{
+  "clouds": [
+    {
+    "id": 1,
+    "location": 1,
+    "duration": -1,
+    "amount": 1450
+  },
+    {
+      "id": 2,
+      "location": 9,
+      "duration": 5,
+      "amount": 1870
+    },
+    {
+      "id": 3,
+      "location": 7,
+      "duration": 2,
+      "amount": 5410
+    },{
+      "id": 4,
+      "location": 11,
+      "duration": 1,
+      "amount": 1810
+    },{
+      "id": 5,
+      "location": 3,
+      "duration": 7,
+      "amount": 1840
+    },{
+      "id": 6,
+      "location": 8,
+      "duration": 4,
+      "amount": 1400
+    },{
+      "id": 17,
+      "location": 6,
+      "duration": 2,
+      "amount": 1400
+    }],
+  "incidents": [
+    {
+      "id": 1,
+      "type": "CLOUD_CREATION",
+      "tick": 0,
+      "location": 3,
+      "radius": 1,
+      "duration": 2,
+      "amount": 5250
+    },
+    {
+      "id": 2,
+      "type": "CLOUD_CREATION",
+      "tick": 0,
+      "location": 9,
+      "radius": 1,
+      "duration": 3,
+      "amount": 4700
+    },
+    {
+      "id": 4,
+      "type": "DROUGHT",
+      "tick": 1,
+      "location": 5,
+      "radius": 2
+    },
+    {
+      "id": 5,
+      "type": "CITY_EXPANSION",
+      "tick": 3,
+      "location": 3
+    },
+    {
+      "id": 7,
+      "type": "CITY_EXPANSION",
+      "tick": 1,
+      "location": 8
+    },
+    {
+      "id": 9,
+      "type": "DROUGHT",
+      "tick": 1,
+      "location": 1,
+      "radius": 1
+    },
+    {
+      "id": 11,
+      "type": "CLOUD_CREATION",
+      "tick": 1,
+      "location": 7,
+      "radius": 2,
+      "duration": -1,
+      "amount": 1750
+    }
+  ]
+}
