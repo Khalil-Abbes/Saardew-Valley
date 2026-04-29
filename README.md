@@ -1,7 +1,4 @@
-# Software Engineering Lab (Software-Praktikum)
-
-**Course:** Software Engineering Lab, Saarland University  
-**Instructors:** Prof. Dr. Sven Apel, Dr. Norman Peitek  
+# Saardew Valley
 
 ## Overview
 This repository contains my contributions to the "Saardew Valley" organic farming simulation, a massive group project completed during the Software Engineering Lab course. The project simulates a deterministic world involving farmers, machines, weather patterns (clouds, rain, sunlight), plant growth cycles, and random incidents across a coordinate-based map.
