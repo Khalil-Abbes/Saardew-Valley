@@ -1,7 +1,7 @@
 # Saardew Valley
 
 ## Overview
-This repository contains my contributions to the "Saardew Valley" organic farming simulation, a massive group project completed during the Software Engineering Lab course. The project simulates a deterministic world involving farmers, machines, weather patterns (clouds, rain, sunlight), plant growth cycles, and random incidents across a coordinate-based map.
+This repository contains my contributions to the "Saardew Valley" organic farming simulation, a massive group project. The project simulates a deterministic world involving farmers, machines, weather patterns (clouds, rain, sunlight), plant growth cycles, and random incidents across a coordinate-based map.
 
 The project was divided into two distinct phases to simulate a real-world software engineering lifecycle: a volatile **Design Phase** where requirements changed mid-way, followed by a rigorous **Implementation Phase** focused on code quality, testing, and surviving injected code mutants.
 
